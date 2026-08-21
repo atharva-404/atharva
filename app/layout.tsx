@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
-  metadataBase: new URL("https://atharvasonar.dev"),
+  metadataBase: new URL("https://atharvasonar.me"),
 };
 
 export default function RootLayout({
@@ -71,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${geist.variable} ${geistMono.variable}`}>
       <head>
-        <link rel="canonical" href="https://atharvasonar.dev" />
+        <link rel="canonical" href="https://atharvasonar.me" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -82,7 +82,7 @@ export default function RootLayout({
               jobTitle: "Student Founder & Software Developer",
               description:
                 "Student founder and software developer building AI-powered products, full-stack systems and ambitious technology experiments.",
-              url: "https://atharvasonar.dev",
+              url: "https://atharvasonar.me",
               sameAs: [
                 "https://github.com/atharva-404",
                 "https://www.linkedin.com/in/atharva-sonar-/",
