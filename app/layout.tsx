@@ -92,7 +92,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://atharvasonar.me"),
   verification: {
-    google: "a9b30e1069863666",
+    google: "B18oGk-fF0zEKSH2Oun3PbZGLHpmhrvyOE5BHEO7Dcs",
   },
 };
 
@@ -107,7 +107,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://atharvasonar.me" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#FAFAF7" />
-        <meta name="google-site-verification" content="a9b30e1069863666" />
+        <meta name="google-site-verification" content="B18oGk-fF0zEKSH2Oun3PbZGLHpmhrvyOE5BHEO7Dcs" />
 
         {/* JSON-LD Structured Data — Person */}
         <script
