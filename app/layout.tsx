@@ -91,6 +91,10 @@ export const metadata: Metadata = {
     canonical: "https://atharvasonar.me",
   },
   metadataBase: new URL("https://atharvasonar.me"),
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   verification: {
     google: "B18oGk-fF0zEKSH2Oun3PbZGLHpmhrvyOE5BHEO7Dcs",
   },
@@ -105,7 +109,8 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.variable} ${geist.variable} ${geistMono.variable}`}>
       <head>
         <link rel="canonical" href="https://atharvasonar.me" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#FAFAF7" />
         <meta name="google-site-verification" content="B18oGk-fF0zEKSH2Oun3PbZGLHpmhrvyOE5BHEO7Dcs" />
 
