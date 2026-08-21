@@ -14,7 +14,6 @@ const labItems = [
   { label: "FinGrow", desc: "AI Financial Intelligence Platform", status: "BUILDING", color: "#D97A57" },
   { label: "Velquix", desc: "Product studio — Ideas → Products → Experiments", status: "BUILDING", color: "#7FA06F" },
   { label: "Datify", desc: "AI-powered compatibility concept", status: "PROTOTYPE", color: "#9588C7" },
-  { label: "Drivons", desc: "Urban mobility rental concept", status: "IDEA", color: "#626865" },
 ];
 
 export function FounderSection() {
