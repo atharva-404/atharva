@@ -78,20 +78,7 @@ body {
   line-height: 1.6;
 }
 
-/* Custom cursor only on devices with fine pointer (mouse) */
-@media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-}
-
-/* Disable custom cursor on touch devices */
-@media (pointer: coarse) {
-  body,
-  * {
-    cursor: auto !important;
-  }
-}
+/* Custom cursor dot is purely decorative — native cursor always visible */
 
 img {
   max-width: 100%;
@@ -289,6 +276,13 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   color: #D97A57;
 }
 
+/* Suppress focus outline inside terminal */
+#terminal input:focus-visible,
+#terminal input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* === BUTTONS === */
 
 .btn-primary {
@@ -385,13 +379,11 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   outline-offset: 2px;
 }
 
-/* Pointer fine (mouse) override for cursor */
-@media (pointer: fine) {
-  .btn-primary,
-  .btn-accent,
-  .btn-secondary {
-    cursor: none;
-  }
+/* Buttons use pointer cursor */
+.btn-primary,
+.btn-accent,
+.btn-secondary {
+  cursor: pointer;
 }
 
 /* === MAGNETIC === */

@@ -140,7 +140,7 @@ export function Terminal() {
 
         <SectionReveal delay={0.1}>
           <div
-            className="rounded-xl border border-[#E2E4E1] bg-[#171A19] overflow-hidden cursor-text max-w-3xl"
+            className="rounded-xl border border-[#E2E4E1] bg-[#171A19] overflow-hidden max-w-3xl focus-within:outline-none"
             onClick={() => inputRef.current?.focus()}
           >
             {/* Chrome */}
@@ -171,7 +171,7 @@ export function Terminal() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent text-white text-[12px] sm:text-[13px] font-[family-name:var(--font-mono)] outline-none caret-[#D97A57] min-w-0"
+                className="flex-1 bg-transparent text-white text-[12px] sm:text-[13px] font-[family-name:var(--font-mono)] outline-none caret-[#D97A57] min-w-0 focus:outline-none focus-visible:outline-none"
                 aria-label="Terminal input"
                 autoComplete="off"
                 spellCheck={false}

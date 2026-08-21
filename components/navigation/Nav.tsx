@@ -108,7 +108,7 @@ export function Nav() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
-              className="hidden md:flex items-center px-4 py-2 bg-[#D97A57] text-white text-[12px] tracking-[0.06em] font-semibold rounded-[8px] hover:bg-[#c46c4b] transition-colors min-h-[44px]"
+              className="items-center px-4 py-2 bg-[#D97A57] text-white text-[12px] tracking-[0.06em] font-semibold rounded-[8px] hover:bg-[#c46c4b] transition-colors min-h-[44px] hidden md:flex"
             >
               LET&apos;S BUILD
             </a>
@@ -152,13 +152,33 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[9970] md:hidden bg-[#FAFAF7] flex flex-col"
+            className="fixed inset-0 z-[9990] md:hidden bg-[#FAFAF7] flex flex-col"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
           >
-            {/* Spacer for nav bar */}
-            <div className="h-14 flex-shrink-0" />
+            {/* Top bar with brand and close */}
+            <div className="h-14 flex-shrink-0 flex items-center justify-between px-[clamp(16px,4vw,72px)]">
+              <button
+                onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="font-[family-name:var(--font-display)] font-bold text-base tracking-tight text-[#171A19] min-h-[44px] flex items-center"
+                aria-label="Scroll to top"
+              >
+                ATHARVA<span className="text-[#D97A57]">.</span>
+              </button>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center w-11 h-11 -mr-2"
+                aria-label="Close menu"
+              >
+                <div className="flex flex-col gap-[5px] w-5">
+                  <span className="w-5 h-[1.5px] bg-[#171A19] block origin-center rotate-45 translate-y-[3px]" />
+                  <span className="w-5 h-[1.5px] bg-[#171A19] block origin-center -rotate-45 -translate-y-[3px]" />
+                </div>
+              </button>
+            </div>
+
+            <div className="border-b border-[#E2E4E1]" />
 
             {/* Nav items */}
             <div className="flex-1 flex flex-col justify-center px-8">

@@ -123,7 +123,7 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
                     value={query}
                     onChange={(e) => { setQuery(e.target.value); setSelected(""); }}
                     placeholder="Type a command or search..."
-                    className="flex-1 bg-transparent text-[#171A19] placeholder-[#626865]/50 text-sm outline-none font-[family-name:var(--font-mono)]"
+                    className="flex-1 bg-transparent text-[#171A19] placeholder-[#626865]/50 text-sm outline-none font-[family-name:var(--font-mono)] focus:outline-none focus-visible:outline-none"
                     aria-label="Command search"
                   />
                   <button
