@@ -37,7 +37,7 @@ export function Skills() {
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-3.5 py-1.5 rounded-lg text-[11px] tracking-[0.06em] font-semibold transition-all cursor-none font-[family-name:var(--font-mono)] ${
+                className={`px-3.5 py-2 rounded-lg text-[11px] tracking-[0.06em] font-semibold transition-all font-[family-name:var(--font-mono)] min-h-[44px] ${
                   filter === cat
                     ? cat === "ALL"
                       ? "bg-[#171A19] text-white"
@@ -71,7 +71,7 @@ export function Skills() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
-                className="px-3 py-1.5 border rounded-lg text-[12px] font-[family-name:var(--font-mono)] font-medium transition-colors cursor-none"
+                className="px-3 py-1.5 border rounded-lg text-[12px] font-[family-name:var(--font-mono)] font-medium transition-colors"
                 style={{
                   borderColor: `${config.color}18`,
                   color: filter === "ALL" ? "#626865" : config.color,

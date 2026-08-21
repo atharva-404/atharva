@@ -32,7 +32,7 @@ export function ProjectUniverse() {
           </p>
         </SectionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {otherProjects.map((project, i) => (
             <motion.button
               key={project.id}
@@ -42,7 +42,7 @@ export function ProjectUniverse() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               whileHover={{ y: -3 }}
-              className={`text-left p-5 border rounded-xl transition-all cursor-none group ${
+              className={`text-left p-4 sm:p-5 border rounded-xl transition-all group ${
                 selected === project.id
                   ? "border-[#D97A57]/30 bg-white"
                   : "border-[#E2E4E1] hover:border-[#E2E4E1] bg-white"
@@ -89,8 +89,8 @@ export function ProjectUniverse() {
               transition={{ duration: 0.35 }}
               className="mt-4 overflow-hidden"
             >
-              <div className="border border-[#E2E4E1] rounded-xl p-6 bg-white">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="border border-[#E2E4E1] rounded-xl p-4 sm:p-6 bg-white">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <p className="label-mono text-[#626865]/50 mb-1.5">PROBLEM</p>
                     <p className="text-[#626865] text-[13px] mb-4 leading-relaxed">{selectedProject.problem}</p>
@@ -115,7 +115,7 @@ export function ProjectUniverse() {
                         href={selectedProject.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[13px] text-[#D97A57] hover:underline cursor-none font-[family-name:var(--font-mono)]"
+                        className="inline-flex items-center gap-1 text-[13px] text-[#D97A57] hover:underline font-[family-name:var(--font-mono)]"
                       >
                         View on GitHub →
                       </a>

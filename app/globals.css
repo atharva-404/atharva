@@ -67,6 +67,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -74,13 +75,39 @@ body {
   color: #171A19;
   font-family: "Geist", system-ui, sans-serif;
   overflow-x: hidden;
-  cursor: none;
   line-height: 1.6;
+}
+
+/* Custom cursor only on devices with fine pointer (mouse) */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+/* Disable custom cursor on touch devices */
+@media (pointer: coarse) {
+  body,
+  * {
+    cursor: auto !important;
+  }
 }
 
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Prevent any element from overflowing viewport */
+main {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Ensure text doesn't break out of containers */
+h1, h2, h3, h4, h5, h6, p, span, a {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* === SCROLLBAR === */
@@ -136,7 +163,7 @@ img {
   font-family: "Outfit", system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 0.95;
+  line-height: 1.0;
 }
 
 /* Subheading */
@@ -144,7 +171,7 @@ img {
   font-family: "Outfit", system-ui, sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 /* Technical label */
@@ -154,6 +181,12 @@ img {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 10px;
+}
+
+@media (min-width: 640px) {
+  .heading-section {
+    line-height: 0.95;
+  }
 }
 
 /* Gradient text — subtle terracotta */
@@ -205,15 +238,29 @@ img {
   }
 }
 
+/* === SAFE AREA (notch devices) === */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+}
+
 /* === LAYOUT === */
 
 .section-padding {
-  padding: 5rem 1.5rem;
+  padding: 3.5rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 4.5rem 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding: 6rem 2.5rem;
+    padding: 5.5rem 2.5rem;
   }
 }
 
@@ -226,13 +273,13 @@ img {
 .container-xl {
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 72px);
+  padding-inline: clamp(16px, 4vw, 72px);
 }
 
 .container-lg {
   max-width: 1200px;
   margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 72px);
+  padding-inline: clamp(16px, 4vw, 72px);
 }
 
 /* === TERMINAL === */
@@ -240,6 +287,111 @@ img {
 .terminal-line::before {
   content: "$ ";
   color: #D97A57;
+}
+
+/* === BUTTONS === */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  min-height: 48px;
+  background: #171A19;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #2c302f;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #D97A57;
+  outline-offset: 2px;
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  min-height: 48px;
+  background: #D97A57;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-accent:hover {
+  background: #c46c4b;
+  transform: translateY(-1px);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+}
+
+.btn-accent:focus-visible {
+  outline: 2px solid #D97A57;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  min-height: 48px;
+  background: transparent;
+  color: #626865;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+  border: 1px solid #E2E4E1;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: #D97A57;
+  color: #171A19;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid #D97A57;
+  outline-offset: 2px;
+}
+
+/* Pointer fine (mouse) override for cursor */
+@media (pointer: fine) {
+  .btn-primary,
+  .btn-accent,
+  .btn-secondary {
+    cursor: none;
+  }
 }
 
 /* === MAGNETIC === */

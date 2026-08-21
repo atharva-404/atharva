@@ -48,7 +48,7 @@ export function Identity() {
                 {["Builder", "Founder", "Developer", "AI Enthusiast", "Product Thinker"].map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 border border-[#E2E4E1] rounded-md text-[11px] text-[#626865] hover:border-[#D97A57]/30 hover:text-[#171A19] transition-all font-[family-name:var(--font-mono)] cursor-none"
+                    className="px-3 py-1 border border-[#E2E4E1] rounded-md text-[11px] text-[#626865] hover:border-[#D97A57]/30 hover:text-[#171A19] transition-all font-[family-name:var(--font-mono)]"
                   >
                     {tag}
                   </span>
@@ -58,28 +58,27 @@ export function Identity() {
 
             {/* Builder loop */}
             <SectionReveal delay={0.2}>
-              <div className="mt-10">
+              <div className="mt-8 sm:mt-10">
                 <p className="label-mono text-[#626865]/60 mb-4">
                   The Builder&apos;s Loop
                 </p>
                 <div className="flex items-center gap-0 flex-wrap">
                   {timeline.map((step, i) => (
-                    <div key={step.label} className="flex items-center">
+                    <div key={step.label} className="flex items-center mb-2 sm:mb-0">
                       <motion.div
                         initial={{ opacity: 0, y: 8 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.06 }}
-                        whileHover={{ y: -2 }}
-                        className="group text-center cursor-none"
+                        className="group text-center"
                       >
-                        <div className="px-3 py-1.5 border border-[#E2E4E1] rounded-lg group-hover:border-[#D97A57]/30 transition-colors">
-                          <p className="font-medium text-[13px] text-[#171A19] group-hover:text-[#D97A57] transition-colors">{step.label}</p>
-                          <p className="text-[9px] text-[#626865] mt-0.5 font-[family-name:var(--font-mono)]">{step.desc}</p>
+                        <div className="px-2.5 sm:px-3 py-1.5 border border-[#E2E4E1] rounded-lg group-hover:border-[#D97A57]/30 transition-colors">
+                          <p className="font-medium text-[12px] sm:text-[13px] text-[#171A19] group-hover:text-[#D97A57] transition-colors">{step.label}</p>
+                          <p className="text-[8px] sm:text-[9px] text-[#626865] mt-0.5 font-[family-name:var(--font-mono)]">{step.desc}</p>
                         </div>
                       </motion.div>
                       {i < timeline.length - 1 && (
-                        <span className="text-[#E2E4E1] mx-1 text-xs">→</span>
+                        <span className="text-[#E2E4E1] mx-0.5 sm:mx-1 text-xs">→</span>
                       )}
                     </div>
                   ))}
@@ -90,9 +89,9 @@ export function Identity() {
 
           {/* Right */}
           <SectionReveal delay={0.1} direction="left">
-            <div className="flex flex-col items-center lg:items-end gap-5">
-              {/* Portrait */}
-              <div className="relative lg:hidden xl:flex">
+            <div className="flex flex-col items-center lg:items-end gap-4 sm:gap-5">
+              {/* Portrait — hidden on mobile (shown in hero instead), visible on lg+ */}
+              <div className="relative hidden lg:block">
                 <div className="relative w-44 h-44 rounded-xl overflow-hidden border border-[#E2E4E1]">
                   <Image
                     src="/atharva sonar.jpeg"

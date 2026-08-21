@@ -124,7 +124,7 @@ export function StartupLab() {
           </p>
         </SectionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {labItems.map((item, i) => (
             <motion.div
               key={item.label}
@@ -132,7 +132,7 @@ export function StartupLab() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="p-5 border border-[#E2E4E1] rounded-xl bg-white hover:border-[#E2E4E1] transition-all group cursor-none"
+              className="p-4 sm:p-5 border border-[#E2E4E1] rounded-xl bg-white hover:border-[#E2E4E1] transition-all group"
             >
               <div className="flex justify-between items-start mb-3">
                 <span className="text-[15px] font-bold font-[family-name:var(--font-display)]" style={{ color: item.color }}>

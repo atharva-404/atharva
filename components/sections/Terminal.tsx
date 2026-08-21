@@ -144,39 +144,39 @@ export function Terminal() {
             onClick={() => inputRef.current?.focus()}
           >
             {/* Chrome */}
-            <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-[#2a2f2e]">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#3a3f3e]" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#3a3f3e]" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#3a3f3e]" />
-              <span className="ml-3 text-[10px] text-[#626865] font-[family-name:var(--font-mono)]">atharva@builder — ~/portfolio</span>
+            <div className="flex items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-[#2a2f2e]">
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#3a3f3e]" />
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#3a3f3e]" />
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#3a3f3e]" />
+              <span className="ml-2 sm:ml-3 text-[9px] sm:text-[10px] text-[#626865] font-[family-name:var(--font-mono)] truncate">atharva@builder — ~/portfolio</span>
             </div>
 
-            {/* Output — constrained height */}
-            <div className="p-4 h-[420px] max-h-[450px] overflow-y-auto font-[family-name:var(--font-mono)] text-[13px]">
+            {/* Output — constrained height, smaller on mobile */}
+            <div className="p-3 sm:p-4 h-[280px] sm:h-[360px] md:h-[420px] max-h-[450px] overflow-y-auto font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px]">
               {lines.map((line) => (
                 <div key={line.id} className={line.type === "blank" ? "h-2.5" : "mb-0.5"}>
-                  {line.type === "command" && <span className="text-[#D97A57]">{line.text}</span>}
-                  {line.type === "output" && <span className="text-[#626865]">{line.text}</span>}
-                  {line.type === "error" && <span className="text-[#9588C7]">{line.text}</span>}
+                  {line.type === "command" && <span className="text-[#D97A57] break-all">{line.text}</span>}
+                  {line.type === "output" && <span className="text-[#626865] break-all">{line.text}</span>}
+                  {line.type === "error" && <span className="text-[#9588C7] break-all">{line.text}</span>}
                 </div>
               ))}
               <div ref={bottomRef} />
             </div>
 
             {/* Input */}
-            <form onSubmit={handleSubmit} className="flex items-center gap-2 px-4 py-2.5 border-t border-[#2a2f2e]">
-              <span className="text-[#D97A57] font-[family-name:var(--font-mono)] text-[13px]">$</span>
+            <form onSubmit={handleSubmit} className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-t border-[#2a2f2e]">
+              <span className="text-[#D97A57] font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px]">$</span>
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent text-white text-[13px] font-[family-name:var(--font-mono)] outline-none cursor-none caret-[#D97A57]"
+                className="flex-1 bg-transparent text-white text-[12px] sm:text-[13px] font-[family-name:var(--font-mono)] outline-none caret-[#D97A57] min-w-0"
                 aria-label="Terminal input"
                 autoComplete="off"
                 spellCheck={false}
               />
-              <span className="w-1.5 h-4 bg-[#D97A57] animate-[blink_1s_ease-in-out_infinite]" aria-hidden="true" />
+              <span className="w-1.5 h-4 bg-[#D97A57] animate-[blink_1s_ease-in-out_infinite] flex-shrink-0" aria-hidden="true" />
             </form>
           </div>
         </SectionReveal>

@@ -86,7 +86,7 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
+  }, 
   alternates: {
     canonical: "https://atharvasonar.me",
   },
@@ -108,6 +108,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${geist.variable} ${geistMono.variable}`}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="canonical" href="https://atharvasonar.me" />
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />

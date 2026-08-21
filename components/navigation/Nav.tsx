@@ -20,7 +20,7 @@ export function Nav() {
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handler);
+    window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
@@ -30,10 +30,24 @@ export function Nav() {
         e.preventDefault();
         setCommandOpen((v) => !v);
       }
+      // Close mobile menu on Escape
+      if (e.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [mobileOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   const scrollTo = (href: string) => {
     const id = href.replace("#", "");
@@ -61,7 +75,7 @@ export function Nav() {
           {/* Brand */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="font-[family-name:var(--font-display)] font-bold text-base tracking-tight text-[#171A19] hover:text-[#D97A57] transition-colors cursor-none"
+            className="font-[family-name:var(--font-display)] font-bold text-base tracking-tight text-[#171A19] hover:text-[#D97A57] transition-colors min-h-[44px] flex items-center"
             aria-label="Scroll to top"
           >
             ATHARVA<span className="text-[#D97A57]">.</span>
@@ -73,7 +87,7 @@ export function Nav() {
               <button
                 key={item.label}
                 onClick={() => scrollTo(item.href)}
-                className="text-[13px] tracking-[0.08em] text-[#626865] hover:text-[#171A19] transition-colors font-medium cursor-none"
+                className="text-[13px] tracking-[0.08em] text-[#626865] hover:text-[#171A19] transition-colors font-medium min-h-[44px] flex items-center"
               >
                 {item.label}
               </button>
@@ -84,70 +98,115 @@ export function Nav() {
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setCommandOpen(true)}
-              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 border border-[#E2E4E1] rounded-lg text-[11px] text-[#626865] hover:border-[#D97A57]/40 hover:text-[#D97A57] transition-all font-[family-name:var(--font-mono)] cursor-none"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 border border-[#E2E4E1] rounded-lg text-[11px] text-[#626865] hover:border-[#D97A57]/40 hover:text-[#D97A57] transition-all font-[family-name:var(--font-mono)] min-h-[44px]"
               aria-label="Open command center (Ctrl+K)"
             >
               <span>⌘</span>
               <span>K</span>
             </button>
 
-            <motion.a
+            <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-4 py-2 bg-[#D97A57] text-white text-[12px] tracking-[0.06em] font-semibold rounded-[8px] hover:bg-[#c46c4b] transition-colors cursor-none"
+              className="hidden md:flex items-center px-4 py-2 bg-[#D97A57] text-white text-[12px] tracking-[0.06em] font-semibold rounded-[8px] hover:bg-[#c46c4b] transition-colors min-h-[44px]"
             >
               LET&apos;S BUILD
-            </motion.a>
+            </a>
 
-            {/* Mobile hamburger */}
+            {/* Mobile hamburger — 44×44 touch target */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden flex flex-col gap-1.5 p-2 cursor-none"
-              aria-label="Toggle mobile menu"
+              className="md:hidden flex items-center justify-center w-11 h-11 -mr-2"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
             >
-              <motion.span
-                animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
-                className="w-5 h-px bg-[#171A19] block origin-center"
-              />
-              <motion.span
-                animate={{ opacity: mobileOpen ? 0 : 1 }}
-                className="w-5 h-px bg-[#171A19] block"
-              />
-              <motion.span
-                animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
-                className="w-5 h-px bg-[#171A19] block origin-center"
-              />
+              <div className="flex flex-col gap-[5px] w-5">
+                <motion.span
+                  animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-5 h-[1.5px] bg-[#171A19] block origin-center"
+                />
+                <motion.span
+                  animate={{ opacity: mobileOpen ? 0 : 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="w-5 h-[1.5px] bg-[#171A19] block"
+                />
+                <motion.span
+                  animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-5 h-[1.5px] bg-[#171A19] block origin-center"
+                />
+              </div>
             </button>
           </div>
         </div>
+      </motion.nav>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-[#E2E4E1] bg-[#FAFAF7]/95 backdrop-blur-md"
-            >
-              <div className="px-6 py-5 flex flex-col gap-3">
-                {navItems.map((item) => (
-                  <button
+      {/* Mobile Menu — fullscreen overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[9970] md:hidden bg-[#FAFAF7] flex flex-col"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+          >
+            {/* Spacer for nav bar */}
+            <div className="h-14 flex-shrink-0" />
+
+            {/* Nav items */}
+            <div className="flex-1 flex flex-col justify-center px-8">
+              <nav className="space-y-1">
+                {navItems.map((item, i) => (
+                  <motion.button
                     key={item.label}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + i * 0.04, duration: 0.3 }}
                     onClick={() => scrollTo(item.href)}
-                    className="text-left text-[13px] tracking-[0.08em] text-[#626865] hover:text-[#171A19] transition-colors font-medium cursor-none py-1.5"
+                    className="block w-full text-left py-3 text-[clamp(1.5rem,5vw,2rem)] font-[family-name:var(--font-display)] font-bold text-[#171A19] hover:text-[#D97A57] transition-colors min-h-[48px] tracking-tight"
                   >
                     {item.label}
-                  </button>
+                  </motion.button>
                 ))}
-              </div>
+              </nav>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, duration: 0.3 }}
+                className="mt-8 pt-6 border-t border-[#E2E4E1]"
+              >
+                <button
+                  onClick={() => scrollTo("#contact")}
+                  className="w-full py-3.5 bg-[#D97A57] text-white font-semibold text-[14px] tracking-wide rounded-xl hover:bg-[#c46c4b] transition-colors min-h-[48px]"
+                >
+                  LET&apos;S BUILD
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Bottom label */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="px-8 pb-8"
+            >
+              <p className="label-mono text-[#626865]/50">
+                Press <span className="text-[#D97A57]">Ctrl + K</span> for Command Center
+              </p>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

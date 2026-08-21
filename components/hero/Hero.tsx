@@ -53,14 +53,14 @@ export function Hero() {
     >
       {/* 3D scene — desktop only */}
       {mounted && SceneComponent && (
-        <div className="absolute inset-0 md:block hidden opacity-60">
+        <div className="absolute inset-0 hidden md:block opacity-60">
           <SceneComponent />
         </div>
       )}
 
       {/* Content */}
       <div className="relative z-10 w-full container-xl">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center min-h-screen py-24 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-center min-h-screen py-20 sm:py-24 lg:py-0">
 
           {/* Left: Text */}
           <div className="max-w-2xl">
@@ -69,7 +69,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 mb-6"
+              className="inline-flex items-center gap-2 mb-5 sm:mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#7FA06F]" />
               <span className="label-mono text-[#626865]">
@@ -77,15 +77,15 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Name */}
+            {/* Name — responsive with better mobile sizing */}
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-              className="heading-display mb-5"
+              className="heading-display mb-4 sm:mb-5"
             >
-              <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-[#171A19]">ATHARVA</span>
-              <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-[#D97A57]">SONAR</span>
+              <span className="block text-[clamp(2.5rem,12vw,7.5rem)] text-[#171A19]">ATHARVA</span>
+              <span className="block text-[clamp(2.5rem,12vw,7.5rem)] text-[#D97A57]">SONAR</span>
             </motion.h1>
 
             {/* Typewriter role */}
@@ -93,9 +93,9 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mb-4 h-7 flex items-center"
+              className="mb-3 sm:mb-4 h-7 flex items-center"
             >
-              <span className="text-base text-[#626865] font-[family-name:var(--font-mono)]">
+              <span className="text-sm sm:text-base text-[#626865] font-[family-name:var(--font-mono)]">
                 {displayed}
                 <span className="inline-block w-0.5 h-[18px] bg-[#D97A57] ml-0.5 align-middle animate-[blink_1s_ease-in-out_infinite]" />
               </span>
@@ -106,7 +106,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-[clamp(1.1rem,2.2vw,1.4rem)] font-[family-name:var(--font-display)] font-semibold text-[#171A19] mb-2 leading-snug max-w-lg"
+              className="text-[clamp(1.05rem,2.2vw,1.4rem)] font-[family-name:var(--font-display)] font-semibold text-[#171A19] mb-2 leading-snug max-w-lg"
             >
               I build ideas into products.
             </motion.p>
@@ -115,28 +115,52 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.95 }}
-              className="text-[15px] text-[#626865] mb-8 max-w-md leading-relaxed"
+              className="text-[14px] sm:text-[15px] text-[#626865] mb-6 sm:mb-8 max-w-md leading-relaxed"
             >
-              Student founder building AI-powered products, full-stack systems, and ambitious technology experiments.
+              Computer Science student, developer and student founder building AI-powered products, full-stack systems and ambitious technology experiments.
             </motion.p>
 
-            {/* CTAs */}
+            {/* Mobile portrait — shown between text and CTAs on small screens */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="lg:hidden mb-6 flex items-center gap-4"
+            >
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-[#E2E4E1] flex-shrink-0">
+                <Image
+                  src="/atharva sonar.jpeg"
+                  alt="Atharva Sonar"
+                  fill
+                  className="object-cover object-top"
+                  sizes="80px"
+                  priority
+                />
+              </div>
+              <div>
+                <p className="text-[12px] font-[family-name:var(--font-mono)] text-[#171A19] tracking-[0.1em] font-medium">ATHARVA SONAR</p>
+                <p className="text-[10px] text-[#626865] font-[family-name:var(--font-mono)] tracking-wider mt-0.5">STUDENT FOUNDER · DEVELOPER</p>
+              </div>
+            </motion.div>
+
+            {/* CTAs — full width on mobile, inline on desktop */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.1 }}
-              className="flex flex-wrap gap-3"
+              className="flex flex-col sm:flex-row gap-3"
             >
               <button
                 onClick={() => scrollTo("projects")}
-                className="px-5 py-2.5 bg-[#D97A57] text-white font-medium text-[13px] tracking-wide rounded-[10px] hover:bg-[#c46c4b] transition-colors cursor-none"
+                className="btn-primary w-full sm:w-auto"
                 id="hero-explore-cta"
               >
                 Explore My Work
+                <span className="ml-1.5">→</span>
               </button>
               <button
                 onClick={() => scrollTo("contact")}
-                className="px-5 py-2.5 border border-[#E2E4E1] text-[#626865] font-medium text-[13px] rounded-[10px] hover:border-[#D97A57] hover:text-[#171A19] transition-all cursor-none"
+                className="btn-secondary w-full sm:w-auto"
                 id="hero-build-cta"
               >
                 Let&apos;s Build Something
@@ -145,25 +169,25 @@ export function Hero() {
                 href={social.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 border border-[#E2E4E1] text-[#626865] font-medium text-[13px] rounded-[10px] hover:border-[#E2E4E1] hover:text-[#171A19] transition-all cursor-none"
+                className="btn-secondary w-full sm:w-auto text-center"
                 id="hero-resume-cta"
               >
                 View Resume
               </a>
             </motion.div>
 
-            {/* ⌘K hint */}
+            {/* ⌘K hint — hidden on mobile */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.6 }}
-              className="mt-6 label-mono text-[#626865]/60"
+              className="mt-6 label-mono text-[#626865]/60 hidden sm:block"
             >
               Press <span className="text-[#D97A57]">Ctrl + K</span> to open Command Center
             </motion.p>
           </div>
 
-          {/* Right: Portrait */}
+          {/* Right: Portrait — desktop only (larger) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -192,12 +216,12 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — hidden on mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-1.5"
         aria-hidden="true"
       >
         <motion.div

@@ -18,7 +18,7 @@ export function Learning() {
   return (
     <section id="learning" className="section-padding border-t border-[#E2E4E1] bg-[#FAFAF7]" aria-label="Currently learning">
       <div className="container-lg">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
           <div>
             <SectionReveal>
               <p className="label-mono text-[#D97A57] mb-3">GROWTH</p>

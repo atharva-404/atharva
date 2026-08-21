@@ -34,7 +34,7 @@ export function BuildLog() {
 
         <div className="relative">
           {/* Central line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#E2E4E1]" />
+          <div className="absolute left-3 sm:left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#E2E4E1]" />
 
           <div className="space-y-10">
             {buildLog.map((entry, i) => {
@@ -50,12 +50,12 @@ export function BuildLog() {
                   className={`relative flex flex-col md:flex-row ${isLeft ? "md:flex-row" : "md:flex-row-reverse"} items-start gap-6`}
                 >
                   {/* Year */}
-                  <div className={`w-full md:w-1/2 ${isLeft ? "md:text-right md:pr-10" : "md:pl-10"} pl-10 md:pl-0`}>
-                    <div className="inline-block text-3xl md:text-4xl font-[family-name:var(--font-display)] font-bold" style={{ color }}>
+                  <div className={`w-full md:w-1/2 ${isLeft ? "md:text-right md:pr-10" : "md:pl-10"} pl-8 sm:pl-10 md:pl-0`}>
+                    <div className="inline-block text-2xl sm:text-3xl md:text-4xl font-[family-name:var(--font-display)] font-bold" style={{ color }}>
                       {entry.year}
                     </div>
                     <div
-                      className="inline-block ml-3 md:ml-0 md:block text-[9px] px-2 py-0.5 border rounded-full font-[family-name:var(--font-mono)] mt-1"
+                      className="inline-block ml-2 sm:ml-3 md:ml-0 md:block text-[9px] px-2 py-0.5 border rounded-full font-[family-name:var(--font-mono)] mt-1"
                       style={{ color, borderColor: `${color}20`, background: `${color}05` }}
                     >
                       {categoryLabel[entry.category]}
@@ -64,12 +64,12 @@ export function BuildLog() {
 
                   {/* Dot */}
                   <div
-                    className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-2 w-2.5 h-2.5 rounded-full border-2 bg-[#FAFAF7]"
+                    className="absolute left-3 sm:left-4 md:left-1/2 md:-translate-x-1/2 top-2 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border-2 bg-[#FAFAF7]"
                     style={{ borderColor: color }}
                   />
 
                   {/* Entries */}
-                  <div className={`w-full md:w-1/2 ${isLeft ? "md:pl-10" : "md:pr-10"} pl-10 md:pl-0`}>
+                  <div className={`w-full md:w-1/2 ${isLeft ? "md:pl-10" : "md:pr-10"} pl-8 sm:pl-10 md:pl-0`}>
                     <div className="space-y-1.5">
                       {entry.entries.map((e, j) => (
                         <motion.div
@@ -96,7 +96,7 @@ export function BuildLog() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mt-8 pl-10 md:pl-0 md:text-center"
+            className="mt-8 pl-8 sm:pl-10 md:pl-0 md:text-center"
           >
             <div className="inline-flex items-center gap-2 label-mono text-[#626865]/50">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D97A57] animate-pulse" />

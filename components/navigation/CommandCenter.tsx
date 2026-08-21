@@ -123,12 +123,12 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
                     value={query}
                     onChange={(e) => { setQuery(e.target.value); setSelected(""); }}
                     placeholder="Type a command or search..."
-                    className="flex-1 bg-transparent text-[#171A19] placeholder-[#626865]/50 text-sm outline-none font-[family-name:var(--font-mono)] cursor-none"
+                    className="flex-1 bg-transparent text-[#171A19] placeholder-[#626865]/50 text-sm outline-none font-[family-name:var(--font-mono)]"
                     aria-label="Command search"
                   />
                   <button
                     onClick={onClose}
-                    className="text-[#626865] text-[10px] border border-[#E2E4E1] rounded px-1.5 py-0.5 cursor-none font-[family-name:var(--font-mono)]"
+                    className="text-[#626865] text-[10px] border border-[#E2E4E1] rounded px-1.5 py-0.5 font-[family-name:var(--font-mono)]"
                   >
                     ESC
                   </button>
@@ -146,7 +146,7 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
                         <button
                           key={cmd.id}
                           onClick={cmd.action}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors cursor-none ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors min-h-[44px] ${
                             selected === cmd.id
                               ? "bg-[#F1F2EF] text-[#171A19]"
                               : "text-[#626865] hover:bg-[#F1F2EF] hover:text-[#171A19]"

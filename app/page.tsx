@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { CursorGlow } from "@/components/ui/CursorGlow";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Nav } from "@/components/navigation/Nav";
@@ -19,6 +20,18 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
+  // Fix: Always start at top on fresh page load
+  useEffect(() => {
+    // Disable browser scroll restoration
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    // Only scroll to top if there's no hash in the URL (preserve anchor nav)
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <main>
       {/* Global UI */}

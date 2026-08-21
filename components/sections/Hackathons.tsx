@@ -27,7 +27,7 @@ export function Hackathons() {
           </div>
         </SectionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {validHackathons.map((hack, i) => (
             <motion.div
               key={hack.id}
@@ -35,7 +35,7 @@ export function Hackathons() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="border border-[#E2E4E1] rounded-xl p-5 bg-white group cursor-none"
+              className="border border-[#E2E4E1] rounded-xl p-4 sm:p-5 bg-white group"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
@@ -100,7 +100,7 @@ export function Hackathons() {
                       href={hack.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] text-[#626865] hover:text-[#D97A57] transition-colors cursor-none font-[family-name:var(--font-mono)]"
+                      className="text-[11px] text-[#626865] hover:text-[#D97A57] transition-colors font-[family-name:var(--font-mono)]"
                     >
                       GitHub →
                     </a>

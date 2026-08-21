@@ -20,7 +20,7 @@ export function WhatIf() {
         onClick={trigger}
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.97 }}
-        className="px-5 py-2.5 border border-[#3a3f3e] rounded-full text-[13px] font-[family-name:var(--font-mono)] text-[#626865] hover:border-[#D97A57] hover:text-[#D97A57] transition-all cursor-none"
+        className="px-5 py-2.5 border border-[#3a3f3e] rounded-full text-[13px] font-[family-name:var(--font-mono)] text-[#626865] hover:border-[#D97A57] hover:text-[#D97A57] transition-all"
         aria-label="Reveal a 'What If?' statement"
       >
         <span className="mr-1.5 text-[#D97A57]">◈</span>

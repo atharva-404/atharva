@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { social } from "@/data/social";
 
@@ -18,7 +18,6 @@ const fingrowFeatures = [
 
 export function FeaturedProject() {
   const [view, setView] = useState<"product" | "engineering">("product");
-  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <section id="fingrow" className="section-padding border-t border-[#E2E4E1] bg-[#FAFAF7]" aria-label="FinGrow featured project">
@@ -40,12 +39,12 @@ export function FeaturedProject() {
 
         {/* View Toggle */}
         <SectionReveal delay={0.1}>
-          <div className="flex gap-2 mb-8">
+          <div className="flex gap-2 mb-6 sm:mb-8">
             {(["product", "engineering"] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
-                className={`px-4 py-1.5 rounded-lg text-[11px] tracking-[0.06em] font-semibold transition-all cursor-none font-[family-name:var(--font-mono)] uppercase ${
+                className={`px-4 py-2 rounded-lg text-[11px] tracking-[0.06em] font-semibold transition-all font-[family-name:var(--font-mono)] uppercase min-h-[44px] ${
                   view === v
                     ? "bg-[#171A19] text-white"
                     : "border border-[#E2E4E1] text-[#626865] hover:border-[#171A19]/20"
@@ -60,7 +59,7 @@ export function FeaturedProject() {
         {view === "product" ? (
           <SectionReveal delay={0.15}>
             {/* Numbered feature list — editorial */}
-            <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-6 mb-8 sm:mb-10">
               {fingrowFeatures.map((feat, i) => (
                 <motion.div
                   key={feat.num}
@@ -87,16 +86,16 @@ export function FeaturedProject() {
               transition={{ delay: 0.2 }}
               className="rounded-xl border border-[#E2E4E1] bg-white overflow-hidden"
             >
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#E2E4E1] bg-[#F1F2EF]">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#E2E4E1]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#E2E4E1]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#E2E4E1]" />
-                <div className="flex-1 mx-3 h-5 bg-white border border-[#E2E4E1] rounded flex items-center px-2">
-                  <span className="text-[10px] text-[#626865] font-[family-name:var(--font-mono)]">fingrow.app/dashboard</span>
+              <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-[#E2E4E1] bg-[#F1F2EF]">
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#E2E4E1]" />
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#E2E4E1]" />
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#E2E4E1]" />
+                <div className="flex-1 mx-2 sm:mx-3 h-5 bg-white border border-[#E2E4E1] rounded flex items-center px-2">
+                  <span className="text-[9px] sm:text-[10px] text-[#626865] font-[family-name:var(--font-mono)] truncate">fingrow.app/dashboard</span>
                 </div>
               </div>
 
-              <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="p-3 sm:p-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { label: "Monthly Spend", value: "₹XX,XXX", change: "AI tracked", color: "#D97A57" },
                   { label: "Savings Goal", value: "67%", change: "On track", color: "#7FA06F" },
@@ -109,9 +108,9 @@ export function FeaturedProject() {
                   </div>
                 ))}
 
-                <div className="md:col-span-2 bg-[#F1F2EF] rounded-lg p-3 border border-[#E2E4E1]">
+                <div className="sm:col-span-2 bg-[#F1F2EF] rounded-lg p-3 border border-[#E2E4E1]">
                   <p className="label-mono text-[#626865] mb-2">SPENDING ANALYSIS</p>
-                  <div className="flex items-end gap-1.5 h-12">
+                  <div className="flex items-end gap-1 sm:gap-1.5 h-12">
                     {[40, 70, 45, 85, 55, 90, 65, 78, 52, 88, 70, 95].map((h, i) => (
                       <motion.div
                         key={`bar-${i}`}
@@ -158,13 +157,13 @@ export function FeaturedProject() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex flex-col md:flex-row md:items-center gap-3 p-4 border border-[#E2E4E1] rounded-xl hover:border-[#D97A57]/20 transition-colors group bg-white"
+                  className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 border border-[#E2E4E1] rounded-xl hover:border-[#D97A57]/20 transition-colors group bg-white"
                 >
                   <div className="w-24 flex-shrink-0">
                     <p className="label-mono text-[#626865]/50 mb-0.5">LAYER</p>
                     <p className="text-[13px] font-semibold text-[#D97A57]">{layer.layer}</p>
                   </div>
-                  <div className="w-px h-6 bg-[#E2E4E1] hidden md:block" />
+                  <div className="w-px h-6 bg-[#E2E4E1] hidden sm:block" />
                   <div className="flex-1">
                     <p className="font-medium text-[14px] text-[#171A19] mb-0.5">{layer.tech}</p>
                     <p className="text-[13px] text-[#626865]">{layer.desc}</p>
@@ -189,7 +188,7 @@ export function FeaturedProject() {
             href={social.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-5 py-2.5 border border-[#E2E4E1] text-[#626865] text-[13px] font-medium rounded-[10px] hover:border-[#D97A57] hover:text-[#D97A57] transition-all cursor-none"
+            className="btn-secondary inline-flex"
           >
             View GitHub (Private)
           </a>
