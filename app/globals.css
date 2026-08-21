@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+@theme {
+  /* === DESIGN TOKENS === */
+
+  /* Foundation */
+  --color-background: #FAFAF7;
+  --color-surface: #F1F2EF;
+  --color-dark: #171A19;
+
+  /* Text */
+  --color-text-primary: #171A19;
+  --color-text-secondary: #626865;
+
+  /* Border */
+  --color-border: #E2E4E1;
+
+  /* Accents */
+  --color-terracotta: #D97A57;
+  --color-sage: #7FA06F;
+  --color-cream: #F1C47A;
+  --color-lavender: #9588C7;
+
+  /* Typography */
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", monospace;
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 25s linear infinite;
+}
+
+/* === KEYFRAMES === */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* === BASE === */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #FAFAF7;
+  color: #171A19;
+  font-family: "Geist", system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* === SCROLLBAR === */
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F2EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2E4E1;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D97A57;
+}
+
+/* === SELECTION === */
+
+::selection {
+  background: rgba(217, 122, 87, 0.12);
+  color: #171A19;
+}
+
+/* === FOCUS === */
+
+:focus-visible {
+  outline: 2px solid #D97A57;
+  outline-offset: 2px;
+}
+
+/* === TYPOGRAPHY UTILITIES === */
+
+.font-display {
+  font-family: "Outfit", system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: "Geist Mono", "JetBrains Mono", monospace;
+}
+
+/* Display heading — hero/major */
+.heading-display {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+/* Section heading */
+.heading-section {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+/* Subheading */
+.heading-sub {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Technical label */
+.label-mono {
+  font-family: "Geist Mono", "JetBrains Mono", monospace;
+  font-weight: 450;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+/* Gradient text — subtle terracotta */
+.gradient-text {
+  background: linear-gradient(135deg, #D97A57, #F1C47A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-green {
+  background: linear-gradient(135deg, #7FA06F, #a8c89a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === SURFACES === */
+
+.glass {
+  background: rgba(241, 242, 239, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid #E2E4E1;
+}
+
+/* === STATUS BADGES === */
+
+.status-building { color: #D97A57; border-color: rgba(217, 122, 87, 0.2); background: rgba(217, 122, 87, 0.04); }
+.status-mvp { color: #7FA06F; border-color: rgba(127, 160, 111, 0.2); background: rgba(127, 160, 111, 0.04); }
+.status-experiment { color: #F1C47A; border-color: rgba(241, 196, 122, 0.25); background: rgba(241, 196, 122, 0.05); }
+.status-prototype { color: #9588C7; border-color: rgba(149, 136, 199, 0.2); background: rgba(149, 136, 199, 0.04); }
+.status-completed { color: #7FA06F; border-color: rgba(127, 160, 111, 0.2); background: rgba(127, 160, 111, 0.04); }
+.status-idea { color: #626865; border-color: rgba(98, 104, 101, 0.2); background: rgba(98, 104, 101, 0.04); }
+.status-research { color: #9588C7; border-color: rgba(149, 136, 199, 0.2); background: rgba(149, 136, 199, 0.04); }
+.status-shipped { color: #7FA06F; border-color: rgba(127, 160, 111, 0.2); background: rgba(127, 160, 111, 0.04); }
+
+/* === REDUCED MOTION === */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* === LAYOUT === */
+
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-padding {
+    padding: 7rem 4rem;
+  }
+}
+
+.container-xl {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 72px);
+}
+
+.container-lg {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 72px);
+}
+
+/* === TERMINAL === */
+
+.terminal-line::before {
+  content: "$ ";
+  color: #D97A57;
+}
+
+/* === MAGNETIC === */
+
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* === GLOW === */
+
+.glow-orange {
+  box-shadow: 0 4px 20px rgba(217, 122, 87, 0.15);
+}
