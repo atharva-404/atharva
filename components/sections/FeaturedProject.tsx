@@ -157,7 +157,7 @@ export function FeaturedProject() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 border border-[#E2E4E1] rounded-xl hover:border-[#D97A57]/20 transition-colors group bg-white"
+                  className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl hover:bg-[#F1F2EF] transition-colors group bg-white shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
                 >
                   <div className="w-24 flex-shrink-0">
                     <p className="label-mono text-[#626865]/50 mb-0.5">LAYER</p>

@@ -236,18 +236,18 @@ h1, h2, h3, h4, h5, h6, p, span, a {
 /* === LAYOUT === */
 
 .section-padding {
-  padding: 3.5rem 1.25rem;
+  padding: 4rem 1.25rem;
 }
 
 @media (min-width: 640px) {
   .section-padding {
-    padding: 4.5rem 1.5rem;
+    padding: 5rem 1.5rem;
   }
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding: 5.5rem 2.5rem;
+    padding: 6rem 2.5rem;
   }
 }
 
@@ -267,6 +267,19 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: clamp(16px, 4vw, 72px);
+}
+
+/* === SECTION DIVIDERS === */
+
+/* Make section borders lighter on mobile for less boxy feel */
+section[class*="border-t"] {
+  border-top-color: rgba(226, 228, 225, 0.5);
+}
+
+@media (min-width: 768px) {
+  section[class*="border-t"] {
+    border-top-color: #E2E4E1;
+  }
 }
 
 /* === TERMINAL === */

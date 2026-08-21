@@ -47,7 +47,7 @@ export function FounderSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Velquix */}
           <SectionReveal>
-            <div className="border border-[#E2E4E1] rounded-xl p-6 bg-white">
+            <div className="rounded-xl p-5 sm:p-6 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-8 h-8 rounded-lg bg-[#D97A57]/8 flex items-center justify-center text-[#D97A57] text-sm font-bold font-[family-name:var(--font-display)]">
                   V
@@ -64,7 +64,7 @@ export function FounderSection() {
                 Ideas → Products → Experiments → Systems
               </p>
 
-              <div className="mt-5 pt-5 border-t border-[#E2E4E1]">
+              <div className="mt-5 pt-5 border-t border-[#E2E4E1]/40">
                 <p className="label-mono text-[#626865]/50 mb-2">FOCUS AREAS</p>
                 <div className="flex flex-wrap gap-1.5">
                   {["Fintech", "AI Products", "SaaS", "Developer Tools"].map((area) => (
@@ -132,7 +132,7 @@ export function StartupLab() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="p-4 sm:p-5 border border-[#E2E4E1] rounded-xl bg-white hover:border-[#E2E4E1] transition-all group"
+              className="p-4 sm:p-5 rounded-xl bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_2px_6px_rgba(0,0,0,0.07)] transition-all group"
             >
               <div className="flex justify-between items-start mb-3">
                 <span className="text-[15px] font-bold font-[family-name:var(--font-display)]" style={{ color: item.color }}>

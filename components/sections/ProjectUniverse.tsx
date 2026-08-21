@@ -42,10 +42,10 @@ export function ProjectUniverse() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               whileHover={{ y: -3 }}
-              className={`text-left p-4 sm:p-5 border rounded-xl transition-all group ${
+              className={`text-left p-4 sm:p-5 rounded-xl transition-all group ${
                 selected === project.id
-                  ? "border-[#D97A57]/30 bg-white"
-                  : "border-[#E2E4E1] hover:border-[#E2E4E1] bg-white"
+                  ? "border border-[#D97A57]/30 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
+                  : "bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
               }`}
               aria-expanded={selected === project.id}
               aria-label={`${project.name} — ${project.tagline}`}
@@ -89,7 +89,7 @@ export function ProjectUniverse() {
               transition={{ duration: 0.35 }}
               className="mt-4 overflow-hidden"
             >
-              <div className="border border-[#E2E4E1] rounded-xl p-4 sm:p-6 bg-white">
+              <div className="rounded-xl p-4 sm:p-6 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <p className="label-mono text-[#626865]/50 mb-1.5">PROBLEM</p>

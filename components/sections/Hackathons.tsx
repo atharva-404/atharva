@@ -35,7 +35,7 @@ export function Hackathons() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="border border-[#E2E4E1] rounded-xl p-4 sm:p-5 bg-white group"
+              className="rounded-xl p-4 sm:p-5 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] group"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">

@@ -48,7 +48,7 @@ export function Identity() {
                 {["Builder", "Founder", "Developer", "AI Enthusiast", "Product Thinker"].map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 border border-[#E2E4E1] rounded-md text-[11px] text-[#626865] hover:border-[#D97A57]/30 hover:text-[#171A19] transition-all font-[family-name:var(--font-mono)]"
+                    className="px-3 py-1 rounded-md text-[11px] text-[#626865] hover:text-[#171A19] transition-all font-[family-name:var(--font-mono)] bg-[#F1F2EF]"
                   >
                     {tag}
                   </span>
@@ -72,7 +72,7 @@ export function Identity() {
                         transition={{ delay: i * 0.06 }}
                         className="group text-center"
                       >
-                        <div className="px-2.5 sm:px-3 py-1.5 border border-[#E2E4E1] rounded-lg group-hover:border-[#D97A57]/30 transition-colors">
+                        <div className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#F1F2EF] group-hover:bg-[#E2E4E1]/60 transition-colors">
                           <p className="font-medium text-[12px] sm:text-[13px] text-[#171A19] group-hover:text-[#D97A57] transition-colors">{step.label}</p>
                           <p className="text-[8px] sm:text-[9px] text-[#626865] mt-0.5 font-[family-name:var(--font-mono)]">{step.desc}</p>
                         </div>
@@ -104,7 +104,7 @@ export function Identity() {
               </div>
 
               {/* Education */}
-              <div className="w-full border border-[#E2E4E1] rounded-xl p-4 bg-white">
+              <div className="w-full rounded-xl p-4 sm:p-5 bg-[#F1F2EF]">
                 <p className="label-mono text-[#626865]/60 mb-3">Education</p>
                 <div className="space-y-3">
                   <div>
@@ -114,7 +114,7 @@ export function Identity() {
                       CURRENT
                     </span>
                   </div>
-                  <div className="border-t border-[#E2E4E1] pt-3">
+                  <div className="border-t border-[#E2E4E1]/50 pt-3">
                     <p className="text-[13px] font-semibold text-[#171A19]">Diploma — Computer Engineering</p>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export function Identity() {
                   { value: "7+", label: "Projects Built" },
                   { value: "3", label: "Hackathons" },
                 ].map((stat) => (
-                  <div key={stat.label} className="border border-[#E2E4E1] rounded-xl p-3 bg-white text-center">
+                  <div key={stat.label} className="rounded-xl p-3 sm:p-4 bg-[#F1F2EF] text-center">
                     <p className="text-xl font-bold text-[#D97A57] font-[family-name:var(--font-display)]">{stat.value}</p>
                     <p className="label-mono text-[#626865] mt-0.5" style={{ fontSize: '9px' }}>{stat.label}</p>
                   </div>
