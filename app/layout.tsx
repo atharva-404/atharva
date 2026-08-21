@@ -92,8 +92,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://atharvasonar.me"),
   verification: {
-    // Add your Google Search Console verification code here after registering
-    // google: "your-verification-code",
+    google: "a9b30e1069863666",
   },
 };
 
