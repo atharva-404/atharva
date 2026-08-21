@@ -108,7 +108,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://atharvasonar.me" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#FAFAF7" />
-        <meta name="google-site-verification" content="" />
+        <meta name="google-site-verification" content="a9b30e1069863666" />
 
         {/* JSON-LD Structured Data — Person */}
         <script
