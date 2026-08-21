@@ -108,14 +108,17 @@ export function Identity() {
                 <p className="label-mono text-[#626865]/60 mb-3">Education</p>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-[13px] font-semibold text-[#171A19]">B.Tech — CS / IT</p>
-                    <p className="text-[11px] text-[#626865] mt-0.5">Bharat College of Engineering, Badlapur</p>
+                    <p className="text-[13px] font-semibold text-[#171A19]">B.E. — Computer Science & IT</p>
+                    <p className="text-[11px] text-[#626865] mt-0.5">University of Mumbai</p>
+                    <p className="text-[10px] text-[#626865]/70 mt-0.5 font-[family-name:var(--font-mono)]">2025 – 2028</p>
                     <span className="inline-block mt-1 text-[9px] px-2 py-0.5 border border-[#7FA06F]/20 text-[#7FA06F] rounded font-[family-name:var(--font-mono)]">
                       CURRENT
                     </span>
                   </div>
                   <div className="border-t border-[#E2E4E1]/50 pt-3">
                     <p className="text-[13px] font-semibold text-[#171A19]">Diploma — Computer Engineering</p>
+                    <p className="text-[11px] text-[#626865] mt-0.5">KCES College of Engineering, Jalgaon</p>
+                    <p className="text-[10px] text-[#626865]/70 mt-0.5 font-[family-name:var(--font-mono)]">2022 – 2025</p>
                   </div>
                 </div>
               </div>
@@ -124,7 +127,7 @@ export function Identity() {
               <div className="w-full grid grid-cols-2 gap-2.5">
                 {[
                   { value: "7+", label: "Projects Built" },
-                  { value: "3", label: "Hackathons" },
+                  { value: "4", label: "Hackathons" },
                 ].map((stat) => (
                   <div key={stat.label} className="rounded-xl p-3 sm:p-4 bg-[#F1F2EF] text-center">
                     <p className="text-xl font-bold text-[#D97A57] font-[family-name:var(--font-display)]">{stat.value}</p>

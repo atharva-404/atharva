@@ -39,8 +39,8 @@ function NodeItem({
   radius: number;
 }) {
   const pos = getPosition(node.angle, radius);
-  const delayStart = 0.1 + (index / nodes.length) * 0.4;
-  const delayEnd = Math.min(delayStart + 0.18, 0.6);
+  const delayStart = 0.15 + (index / nodes.length) * 0.35;
+  const delayEnd = Math.min(delayStart + 0.15, 0.55);
 
   const opacity = useTransform(scrollYProgress, [delayStart, delayEnd], [0, 1]);
   const x = useTransform(scrollYProgress, [delayStart, delayEnd], [0, pos.x]);
@@ -86,8 +86,8 @@ function TransformStep({
   index: number;
   scrollYProgress: MotionValue<number>;
 }) {
-  const start = 0.6 + index * 0.05;
-  const end = Math.min(start + 0.08, 0.95);
+  const start = 0.5 + index * 0.06;
+  const end = Math.min(start + 0.1, 0.95);
   const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
   const y = useTransform(scrollYProgress, [start, end], [20, 0]);
 
@@ -103,11 +103,11 @@ function TransformStep({
 
 export function BuildEngine() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
 
-  const ideaOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
-  const ideaScale = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
-  const ringOpacity = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
+  const ideaOpacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
+  const ideaScale = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0.1, 0.5], [0, 1]);
 
   // Responsive radius — smaller on mobile
   const RADIUS_MOBILE = 90;

@@ -150,7 +150,7 @@ export default function RootLayout({
               ],
               alumniOf: {
                 "@type": "CollegeOrUniversity",
-                name: "Bharat College of Engineering, Badlapur",
+                name: "University of Mumbai",
               },
               address: {
                 "@type": "PostalAddress",
