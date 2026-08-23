@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://atharvasonar.me/sitemap.xml
+
+# Agent instructions
+# llms.txt: https://atharvasonar.me/llms.txt
+# llms.md:  https://atharvasonar.me/llms.md

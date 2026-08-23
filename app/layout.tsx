@@ -198,6 +198,39 @@ export default function RootLayout({
             }),
           }}
         />
+
+        {/* JSON-LD Structured Data — Organization (Velquix / personal studio) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://atharvasonar.me/#organization",
+              name: "Velquix",
+              description:
+                "Personal product studio founded by Atharva Sonar — building AI-powered and full-stack software products.",
+              url: "https://atharvasonar.me",
+              founder: { "@id": "https://atharvasonar.me/#person" },
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "atharvasonar23@gmail.com",
+                contactType: "technical support",
+                availableLanguage: ["English", "Hindi", "Marathi"],
+              },
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Mumbai",
+                addressRegion: "Maharashtra",
+                addressCountry: "IN",
+              },
+              sameAs: [
+                "https://github.com/atharva-404",
+                "https://www.linkedin.com/in/atharva-sonar-/",
+              ],
+            }),
+          }}
+        />
       </head>
       <body className="bg-[#FAFAF7] text-[#171A19] font-[family-name:var(--font-sans)] overflow-x-hidden antialiased">
         {children}
