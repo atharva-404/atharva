@@ -1,8 +1,38 @@
+# robots.txt for https://atharvasonar.me — official site of Atharva Sonar
+# Crawler names verified on 2026-11-05 against:
+#   OpenAI      https://developers.openai.com/api/docs/bots
+#   Anthropic   https://support.claude.com/en/articles/8896518
+#   Perplexity  https://docs.perplexity.ai/guides/bots
+
+# --- Search engines and AI search / answer crawlers: allowed ---------------
+# These decide whether the site can appear and be cited in search results
+# (Google, Bing/Copilot, ChatGPT search, Claude search, Perplexity).
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# --- AI model-training crawlers: managed separately -------------------------
+# Allowed for now so public facts about Atharva's work can inform AI models.
+# To opt out of training without affecting search, change "Allow: /" below
+# to "Disallow: /". Google-Extended controls Gemini training only; it does not
+# affect Google Search or AI Overviews.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+Allow: /
+
+# --- Everyone else ----------------------------------------------------------
 User-agent: *
 Allow: /
 
 Sitemap: https://atharvasonar.me/sitemap.xml
 
-# Agent instructions
-# llms.txt: https://atharvasonar.me/llms.txt
-# llms.md:  https://atharvasonar.me/llms.md
+# Machine-readable summary for AI agents (optional, not a ranking signal):
+# https://atharvasonar.me/llms.txt

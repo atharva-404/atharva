@@ -1,174 +1,412 @@
-export type ProjectStatus = "BUILDING" | "MVP" | "EXPERIMENT" | "PROTOTYPE" | "COMPLETED" | "IDEA" | "RESEARCH";
+/**
+ * Project data. Every link here was checked against the live site or the
+ * public GitHub API. Statuses reflect what is actually deployed:
+ * - SpendDecode is public with free sign-up (checked 2026-11-05).
+ * - Finexa's old Vercel demo returns 404, so it has no live link.
+ *
+ * `caseStudy` powers /projects/<slug>/. Its facts come only from the project's
+ * README or its live website (listed in `sources`). Lessons learned are left
+ * out on purpose until Atharva writes them himself.
+ */
+
+export type ProjectStatus =
+  | "Private preview"
+  | "Live"
+  | "Live demo"
+  | "Hackathon build"
+  | "Completed"
+  | "Earlier project"
+  | "Prototype";
+
+export type ProjectTier = "flagship" | "featured" | "earlier";
+
+export interface ProjectImage {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+export interface CaseStudy {
+  /** Short phrase used in the page title, e.g. "AI Personal Finance Platform". */
+  seoTitle: string;
+  /** Unique meta description for the project page (120–160 characters). */
+  seoDescription: string;
+  /** The problem the project addresses, in plain language. */
+  problem: string;
+  /** Ordered steps of how the product or pipeline works. */
+  workflow?: { title: string; detail: string }[];
+  /** Layers of the system as documented by the README or visible on the live site. */
+  architecture: { layer: string; detail: string }[];
+  /** Design decisions and trade-offs the project itself documents. */
+  decisions?: string[];
+  /** Current status in one sentence. */
+  statusNote: string;
+  /** Schema.org applicationCategory for live apps. */
+  applicationCategory?: string;
+  /** Where the facts on the page come from. */
+  sources: { label: string; url: string }[];
+  /** ISO date the page content last changed (used for sitemap lastmod). */
+  updated: string;
+}
 
 export interface Project {
-  id: string;
+  slug: string;
   name: string;
+  /** Other names the project is known by (repo name, demo branding). */
+  alternateName?: string;
+  category: string;
   tagline: string;
   description: string;
-  problem: string;
-  idea: string;
-  whatIBuilt: string;
+  features: string[];
   tech: string[];
-  challenges: string;
-  learned: string;
+  contribution: string;
   status: ProjectStatus;
-  featured?: boolean;
-  github?: string;
-  live?: string;
-  caseStudy?: string;
-  color: string;
-  accentColor: string;
-  year: string;
+  tier: ProjectTier;
+  hackathon?: string;
+  links: { live?: string; github?: string };
+  image?: ProjectImage;
+  /** Real architecture/module list, rendered as a schematic when there is no screenshot. */
+  schematic?: { label: string; stages: string[][] };
+  /** Extra search terms for the FAQ assistant. */
+  keywords: string[];
+  caseStudy?: CaseStudy;
 }
 
 export const projects: Project[] = [
   {
-    id: "fingrow",
-    name: "FinGrow",
-    tagline: "AI Financial Intelligence Platform",
+    slug: "spenddecode",
+    name: "SpendDecode",
+    category: "AI Fintech",
+    tagline: "AI-powered personal finance and spending intelligence.",
     description:
-      "A financial intelligence platform designed to help people understand their money, analyze spending, build financial goals and make better financial decisions with AI.",
-    problem:
-      "Most people don't understand where their money goes or how to make better financial decisions. Existing apps show data but don't explain it or act on it.",
-    idea:
-      "Build an AI-powered financial companion that doesn't just show charts — it actually understands your financial situation and helps you improve it.",
-    whatIBuilt:
-      "A full-stack fintech platform with an AI assistant (RAG-powered), spending analysis, goal tracking, budget management, smart predictions, transaction intelligence, and payment integration.",
-    tech: ["Python", "Django", "React", "REST APIs", "AI", "RAG", "Gemini", "PostgreSQL", "Supabase", "Razorpay", "FCM"],
-    challenges:
-      "Building a truly intelligent RAG pipeline that understands personal finance context. Designing a clean, non-overwhelming UI for complex financial data.",
-    learned:
-      "End-to-end product development, AI integration at product level, fintech domain knowledge, designing for real users.",
-    status: "BUILDING",
-    featured: true,
-    github: undefined,
-    live: undefined,
-    color: "#FF6B00",
-    accentColor: "#FF8C00",
-    year: "2025–Present",
+      "A personal finance platform that helps people understand their transactions, analyse spending habits, find saving opportunities, and make better purchasing decisions — with an AI layer that explains the numbers instead of just charting them.",
+    features: [
+      "Expense and spending analytics",
+      "AI-powered financial insights",
+      "Transaction understanding",
+      "Money-saving recommendations",
+      "Multi-file financial data analysis",
+      "Budgets and savings goals",
+    ],
+    tech: ["Python", "Django", "Django REST Framework", "React", "Supabase", "LangChain", "AI integrations"],
+    contribution: "Founder-led Velquix product — product direction, backend architecture and AI integration.",
+    status: "Live",
+    tier: "flagship",
+    links: { live: "https://spenddecode.velquix.dev/" },
+    image: {
+      src: "/images/projects/spenddecode.webp",
+      width: 1200,
+      height: 630,
+      alt: "SpendDecode product artwork showing the dashboard, budgets and AI insights on laptop and phone",
+    },
+    keywords: ["spenddecode", "spend decode", "finance", "fintech", "money", "budget", "spending", "flagship"],
+    caseStudy: {
+      seoTitle: "AI Personal Finance Platform",
+      seoDescription:
+        "SpendDecode is an AI personal finance platform by Atharva Sonar and Velquix: statement upload, a financial health score, spending insights and an AI coach.",
+      problem:
+        "Bank and UPI statements list transactions but don't explain them. SpendDecode reads an uploaded statement, organises the transactions and explains spending patterns in plain language, so people can budget, save and make purchase decisions with their own data in front of them.",
+      workflow: [
+        { title: "Create an account", detail: "Sign up without a credit card." },
+        { title: "Upload a statement", detail: "Drop in a bank or UPI statement PDF; the AI extracts the transactions." },
+        { title: "AI analysis", detail: "A financial health score, spending patterns, anomalies and a category breakdown are generated." },
+        { title: "Personalised insights", detail: "An AI financial coach gives recommendations based on the user's real transactions." },
+        { title: "Track progress", detail: "Follow the health score over time and work towards savings goals." },
+      ],
+      architecture: [
+        { layer: "Frontend", detail: "React web app built with Vite." },
+        { layer: "Backend", detail: "Python, Django and Django REST Framework APIs." },
+        { layer: "Data", detail: "Supabase." },
+        { layer: "AI layer", detail: "LLM integrations built with LangChain behind the insights and the AI coach." },
+      ],
+      statusNote: "Live at spenddecode.velquix.dev with a free plan; paid plans add more AI chats and statement uploads.",
+      applicationCategory: "FinanceApplication",
+      sources: [{ label: "SpendDecode website", url: "https://spenddecode.velquix.dev/" }],
+      updated: "2026-11-05",
+    },
   },
   {
-    id: "safeher",
-    name: "SafeHer AI",
-    tagline: "Proactive Safety Monitoring Platform",
+    slug: "velquix-learn",
+    name: "Velquix Learn",
+    category: "EdTech · Learning Platform",
+    tagline: "Structured roadmaps and curated resources for developers.",
     description:
-      "A full-stack proactive safety monitoring platform with live location tracking, ML risk scoring, SOS workflows, voice emergency detection, and agentic safety automation.",
-    problem:
-      "Women's safety in urban environments lacks proactive, real-time monitoring. Existing solutions only react after an incident instead of preventing it.",
-    idea:
-      "Build an AI-powered safety companion that monitors context in real-time, calculates risk, and can autonomously trigger protective actions before danger escalates.",
-    whatIBuilt:
-      "Full-stack safety platform with React frontend, Django REST backend, ML risk engine (scikit-learn), agentic safety automation, voice SOS detection, safe route intelligence, and Google Maps integration.",
-    tech: ["Python", "Django", "React", "TypeScript", "scikit-learn", "REST APIs", "AI", "Google Maps", "JWT"],
-    challenges:
-      "Building a reliable real-time risk scoring engine. Designing autonomous safety workflows that don't produce false positives. Integrating voice detection for emergency phrases.",
-    learned:
-      "ML model integration in production, real-time location systems, safety-critical product design, agentic AI workflows.",
-    status: "COMPLETED",
-    github: "https://github.com/atharva-404/SafeHer-AI",
-    live: "https://safeher-ai-five.vercel.app/",
-    color: "#7C3AED",
-    accentColor: "#6D28D9",
-    year: "2026",
+      "A developer learning platform that turns scattered tutorials into a clear path: career roadmaps, curated free resources and playlists, practice projects, and progress tracking.",
+    features: [
+      "Career roadmaps by stage",
+      "Curated resources and YouTube playlists",
+      "Learning progress tracking",
+      "Streaks and achievement badges",
+    ],
+    tech: ["Next.js", "React"],
+    contribution: "Velquix product — designed and shipped as part of the Velquix product line.",
+    status: "Live",
+    tier: "featured",
+    links: { live: "https://learn.velquix.dev/" },
+    image: {
+      src: "/images/projects/velquix-learn.webp",
+      width: 1200,
+      height: 750,
+      alt: "Velquix Learn homepage with the headline 'Learn with purpose. Build with confidence.' and a backend developer roadmap card",
+    },
+    keywords: ["velquix learn", "learn", "edtech", "roadmap", "education", "learning"],
+    caseStudy: {
+      seoTitle: "Developer Roadmaps Platform",
+      seoDescription:
+        "Velquix Learn, built by Atharva Sonar under Velquix, turns free tutorials into structured developer roadmaps with practice projects and progress tracking.",
+      problem:
+        "Learning to code from scattered tutorials makes it hard to know what to learn next. Velquix Learn turns curated free resources into structured career roadmaps, pairs them with practice, and tracks progress along the way.",
+      workflow: [
+        { title: "Discover", detail: "Pick a career path and set your level." },
+        { title: "Follow a roadmap", detail: "A structured path of stages, modules and resources in a sensible order." },
+        { title: "Learn from resources", detail: "Curated videos, docs and articles." },
+        { title: "Practice", detail: "Module practice tasks, projects and challenges." },
+        { title: "Build", detail: "Ship real projects and grow a profile that shows what you can do." },
+        { title: "Track progress", detail: "Completion, streaks, XP and badges." },
+      ],
+      architecture: [
+        { layer: "Content model", detail: "Career path → roadmap → stage → module → resource." },
+        { layer: "Frontend", detail: "Next.js and React (confirmed from the live site's build output)." },
+        { layer: "Delivery", detail: "Served through Cloudflare." },
+      ],
+      statusNote: "Live and free to start at learn.velquix.dev.",
+      applicationCategory: "EducationalApplication",
+      sources: [{ label: "Velquix Learn website", url: "https://learn.velquix.dev/" }],
+      updated: "2026-11-05",
+    },
   },
   {
-    id: "claimblitz",
+    slug: "claimblitz",
     name: "ClaimBlitz",
-    tagline: "Multi-Agent AI Claims Processor",
+    alternateName: "ClaimBitz",
+    category: "Multi-Agent AI",
+    tagline: "Nine AI agents that process an insurance claim together.",
     description:
-      "9 specialized AI agents collaborate in real-time to process insurance claims — extracting data, validating codes, detecting fraud, assessing risk, and delivering explainable decisions.",
-    problem:
-      "Traditional insurance claim processing takes 30-90 days with manual review, high error rates, and zero transparency for claimants.",
-    idea:
-      "Replace sequential manual processing with an autonomous multi-agent AI system where specialized agents debate, vote, and reach consensus on claims.",
-    whatIBuilt:
-      "A multi-agent system with 9 independent AI agents (Scanner, OCR, Validator, Medical Expert, Policy Expert, Fraud Detection, Risk Assessment, Judge, Communication) using FastAPI, Groq LLM, MongoDB, and Pinecone vector memory. Includes debate mode, consensus voting, and human escalation.",
-    tech: ["Python", "FastAPI", "React", "Groq LLM", "MongoDB", "Pinecone", "Redis", "Celery", "Docker"],
-    challenges:
-      "Designing inter-agent communication protocols. Building a debate system where agents can challenge each other's findings. Handling Groq rate limits while maintaining pipeline flow.",
-    learned:
-      "Multi-agent system architecture, LLM orchestration, vector memory for AI agents, consensus algorithms, building production-grade AI pipelines.",
-    status: "COMPLETED",
-    github: "https://github.com/atharva-404/ClaimBlitz",
-    color: "#F59E0B",
-    accentColor: "#D97706",
-    year: "2026",
+      "A medical insurance claim processor where specialised agents extract, validate, analyse and decide. When analysts disagree, a structured debate and a judge agent settle the verdict, and low-confidence cases are escalated to a human.",
+    features: [
+      "OCR extraction from claim PDFs",
+      "Medical, policy, fraud and risk analysis agents",
+      "Debate rounds, voting and a judge agent",
+      "Explainable per-agent findings and human escalation",
+    ],
+    tech: ["Python", "FastAPI", "React", "Groq LLM", "MongoDB", "Pinecone", "Redis", "Celery"],
+    contribution: "Built with team Deploy House during OFFGRID 1.0.",
+    status: "Live demo",
+    tier: "featured",
+    hackathon: "OFFGRID 1.0",
+    links: {
+      live: "https://claimbitz.vercel.app/",
+      github: "https://github.com/atharva-404/ClaimBlitz",
+    },
+    image: {
+      src: "/images/projects/claimblitz.webp",
+      width: 1200,
+      height: 750,
+      alt: "ClaimBlitz demo console processing a CMS-1500 claim, with a document preview and the AI agent timeline",
+    },
+    keywords: ["claimblitz", "claimbitz", "claim", "insurance", "multi-agent", "agents", "agentic", "fraud"],
+    caseStudy: {
+      seoTitle: "Multi-Agent Claim Processing",
+      seoDescription:
+        "ClaimBlitz is a multi-agent AI system by Atharva Sonar that reads, validates and judges medical insurance claims with debate, voting and human escalation.",
+      problem:
+        "Medical insurance claims are usually reviewed step by step, which the project's README puts at 30–90 days. ClaimBlitz has specialised AI agents read, check and decide on a claim in one automated pipeline, and hands uncertain cases to a person.",
+      workflow: [
+        { title: "Scanner", detail: "Checks that the uploaded document is a valid claim." },
+        { title: "OCR", detail: "Extracts 13+ fields from the claim PDF." },
+        { title: "Validator", detail: "Checks formats and ICD-10 and CPT code syntax." },
+        { title: "Analysts", detail: "Medical, policy, fraud and risk agents each review the claim." },
+        { title: "Consensus and debate", detail: "If analysts disagree, up to two debate and voting rounds run; a 3/4 majority wins." },
+        { title: "Judge", detail: "A judge agent rules only when there is still no consensus." },
+        { title: "Human escalation", detail: "Decisions below 80% confidence go to a human reviewer." },
+        { title: "Communication", detail: "A communication agent drafts the email and SMS to the claimant." },
+      ],
+      architecture: [
+        { layer: "Frontend", detail: "React (Vite, Tailwind CSS) agent command centre with live logs, a risk meter and a CMS-1500 document viewer." },
+        { layer: "API", detail: "Async FastAPI with JWT auth, role-based access and rate limiting." },
+        { layer: "Orchestration", detail: "A supervisor state machine runs the agents; agents exchange typed messages on a message bus." },
+        { layer: "Reasoning", detail: "Llama 3.1 8B on Groq through an OpenAI-compatible API." },
+        { layer: "Data", detail: "MongoDB for claims, Pinecone for per-agent vector memory (optional) and Redis as a shared blackboard." },
+        { layer: "Workers", detail: "Celery for distributed tasks." },
+      ],
+      decisions: [
+        "Groq instead of OpenAI: a free tier, lower latency and the same API format.",
+        "MongoDB instead of Postgres, because claims are nested JSON documents.",
+        "Analyst agents run one after another to stay inside Groq's 30-requests-per-minute limit.",
+        "The judge agent is only called when the analysts disagree.",
+        "Each agent's errors are isolated, so one failure does not stop the pipeline.",
+        "Each agent keeps its own memory namespace.",
+      ],
+      statusNote: "Hackathon build with a public demo console at claimbitz.vercel.app.",
+      applicationCategory: "BusinessApplication",
+      sources: [
+        { label: "ClaimBlitz README on GitHub", url: "https://github.com/atharva-404/ClaimBlitz" },
+        { label: "ClaimBlitz demo", url: "https://claimbitz.vercel.app/" },
+      ],
+      updated: "2026-11-05",
+    },
   },
   {
-    id: "fithub",
-    name: "Fit Hub Gym",
-    tagline: "AI-Powered Gym Management Platform",
+    slug: "safeher-ai",
+    name: "SafeHer AI",
+    category: "AI · Safety Technology",
+    tagline: "Proactive personal-safety monitoring with risk scoring.",
     description:
-      "A full-stack gym management and fitness platform with real-time features, AI coaching, and payment integration.",
-    problem: "Gyms run on spreadsheets and WhatsApp. Members don't get personalized guidance. No real-time insight for owners.",
-    idea:
-      "Create a comprehensive gym platform that handles memberships, real-time workout sessions, AI-powered guidance, and business management in one place.",
-    whatIBuilt:
-      "Full-stack web app with Django, real-time WebSocket sessions, OpenCV-based form detection, AI chatbot for fitness guidance, workout management, and Razorpay payment integration.",
-    tech: ["Django", "Django Channels", "WebSockets", "OpenCV", "Razorpay", "AI Chatbot", "Python", "JavaScript"],
-    challenges:
-      "Real-time WebSocket architecture at scale. Integrating computer vision for exercise form detection in a web environment.",
-    learned: "Real-time systems, WebSocket architecture, computer vision integration, business software design.",
-    status: "COMPLETED",
-    github: "https://github.com/atharva-404/Fitness-Hub-AI-Powered-Web-App",
-    color: "#22C55E",
-    accentColor: "#16A34A",
-    year: "2025",
+      "A full-stack safety platform that tracks live route context, scores risk with a scikit-learn engine, listens for spoken SOS phrases, and lets an agentic engine recommend or trigger protective actions as risk rises.",
+    features: [
+      "Live location tracking and safety dashboard",
+      "ML risk scoring (time, area, isolation, SOS)",
+      "Voice SOS keyword detection",
+      "Agentic responses by risk threshold",
+      "Safe-route and nearby safe-place lookup",
+    ],
+    tech: ["TypeScript", "React", "Vite", "Django", "Django REST Framework", "scikit-learn", "Google Maps", "JWT"],
+    contribution: "Built with team Deploy House during Build And Grow: AI Hackathon 2.0.",
+    status: "Live demo",
+    tier: "featured",
+    hackathon: "Build And Grow: AI Hackathon 2.0",
+    links: {
+      live: "https://safeher-ai-five.vercel.app/",
+      github: "https://github.com/atharva-404/safeher-ai",
+    },
+    image: {
+      src: "/images/projects/safeher-ai.webp",
+      width: 1200,
+      height: 750,
+      alt: "SafeHer AI landing page reading 'Walk free. Stay protected.' with safety score, risk level and tracking status",
+    },
+    keywords: ["safeher", "safe her", "safety", "sos", "women", "risk", "voice"],
+    caseStudy: {
+      seoTitle: "AI Personal Safety Platform",
+      seoDescription:
+        "SafeHer AI is a personal safety platform by Atharva Sonar with live tracking, scikit-learn risk scoring, voice SOS detection and safe-route suggestions.",
+      problem:
+        "SafeHer AI helps people move with more confidence by combining live tracking, risk analysis, safe-route intelligence and emergency response in one app, so protective actions can start as risk rises instead of only after an SOS.",
+      workflow: [
+        { title: "Start tracking", detail: "The user starts a tracked journey." },
+        { title: "Send context", detail: "The frontend sends location and context to the tracking API, which validates it." },
+        { title: "Score risk", detail: "The risk engine computes a score and the factors behind it." },
+        { title: "Respond by threshold", detail: "50+ starts active monitoring, 70+ triggers high-risk recommendations, 85+ runs the full emergency workflow." },
+        { title: "Update the dashboard", detail: "The safety score (100 minus risk) and alerts refresh." },
+      ],
+      architecture: [
+        { layer: "Frontend", detail: "React and TypeScript (Vite, Tailwind CSS, shadcn/ui) dashboard with live route tracking." },
+        { layer: "API", detail: "Django REST Framework with Simple JWT, split into tracking, agents, alerts, routes and accounts apps." },
+        { layer: "Risk engine", detail: "A self-contained scikit-learn model scoring time of day, area type, isolation, location source, SOS status and safe-zone proximity." },
+        { layer: "Voice SOS", detail: "Keyword detection for phrases such as \"help\", \"emergency\", \"bachao\" and \"madad\"." },
+        { layer: "Maps", detail: "Optional Google Maps APIs for safe routes and nearby hospitals, police and stations." },
+        { layer: "Data and hosting", detail: "SQLite or PostgreSQL; frontend on Vercel and backend on Render." },
+      ],
+      decisions: [
+        "The ML risk engine needs no external model file, which keeps it easy to run and deploy.",
+        "When Google Maps is unavailable, the app falls back to default safe zones.",
+        "Production hardening (stricter access rules, host and CORS settings) is still in progress.",
+      ],
+      statusNote: "Live demo at safeher-ai-five.vercel.app; core features are complete and production hardening is in progress.",
+      applicationCategory: "LifestyleApplication",
+      sources: [
+        { label: "SafeHer AI README on GitHub", url: "https://github.com/atharva-404/safeher-ai" },
+        { label: "SafeHer AI demo", url: "https://safeher-ai-five.vercel.app/" },
+      ],
+      updated: "2026-11-05",
+    },
   },
   {
-    id: "rag-pdf",
-    name: "RAG PDF Assistant",
-    tagline: "AI-Powered Document Intelligence",
+    slug: "fithub-gym",
+    name: "FitHub Gym",
+    category: "Full-Stack · AI",
+    tagline: "Gym management with a computer-vision rep counter.",
     description:
-      "A complete RAG system that lets you chat with your PDF documents using Retrieval-Augmented Generation with local embeddings and Google Gemini.",
-    problem: "Reading long PDFs is tedious. Extracting specific information takes too long. Normal chatbots hallucinate answers.",
-    idea: "Build a RAG system that searches your actual document for relevant information before answering — grounding responses in facts.",
-    whatIBuilt:
-      "A full RAG pipeline with PDF text extraction, chunking with overlap, local embeddings (sentence-transformers), FAISS vector search, and Google Gemini for answer generation. Built with Streamlit UI.",
-    tech: ["Python", "RAG", "FAISS", "Sentence Transformers", "Google Gemini", "LangChain", "Streamlit"],
-    challenges: "Achieving accurate retrieval on complex technical documents. Managing context window limits. Optimizing chunk size for precision.",
-    learned: "RAG architecture from scratch, vector embeddings, similarity search, document processing pipelines, LLM prompt engineering.",
-    status: "COMPLETED",
-    github: "https://github.com/atharva-404/RAG-PDF-Assistant",
-    color: "#8B5CF6",
-    accentColor: "#7C3AED",
-    year: "2025",
+      "A Django gym platform covering memberships and subscriptions, trainer dashboards and workout videos, plus an AI trainer that counts biceps curls from the webcam using OpenCV and MediaPipe pose tracking over WebSockets.",
+    features: [
+      "Memberships, subscriptions and Razorpay payments",
+      "AI trainer: OpenCV + MediaPipe rep counting",
+      "Real-time video over Django Channels",
+      "Fitness chatbot and trainer dashboard",
+    ],
+    tech: ["Python", "Django", "Django Channels", "OpenCV", "MediaPipe", "Razorpay", "OpenAI API"],
+    contribution: "Designed and built the full stack.",
+    status: "Completed",
+    tier: "featured",
+    links: { github: "https://github.com/atharva-404/Fitness-Hub-AI-Powered-Web-App" },
+    schematic: {
+      label: "Platform modules",
+      stages: [
+        ["Members", "Subscriptions", "Payments"],
+        ["Webcam", "Pose model", "Rep counter"],
+        ["Trainer dashboard", "Chatbot"],
+      ],
+    },
+    keywords: ["fithub", "fit hub", "gym", "fitness", "opencv", "computer vision", "workout"],
+    caseStudy: {
+      seoTitle: "AI Gym Management App",
+      seoDescription:
+        "FitHub Gym is a Django gym management app by Atharva Sonar with memberships, payments, trainers and an OpenCV and MediaPipe AI trainer that tracks reps.",
+      problem:
+        "Running a gym means managing memberships, payments, trainers and workout guidance in separate places. FitHub Gym (Fitness Hub in the repository) puts them in one Django web app, with a workout video library and an AI trainer that tracks reps from the webcam.",
+      architecture: [
+        { layer: "Frontend", detail: "HTML5, CSS3, JavaScript and Bootstrap." },
+        { layer: "Backend", detail: "Django with OTP-verified sign-in, membership plans, and admin and trainer panels." },
+        { layer: "Real time", detail: "Django Channels (WebSockets)." },
+        { layer: "AI trainer", detail: "OpenCV and MediaPipe pose estimation for rep tracking and form feedback." },
+        { layer: "Chatbot", detail: "OpenAI-powered assistant for workout, diet and membership questions." },
+        { layer: "Data and payments", detail: "SQLite in development, PostgreSQL or MySQL in production; Razorpay payments." },
+      ],
+      statusNote: "Completed. The source code is on GitHub; there is no public deployment.",
+      sources: [{ label: "Fitness Hub README on GitHub", url: "https://github.com/atharva-404/Fitness-Hub-AI-Powered-Web-App" }],
+      updated: "2026-11-05",
+    },
   },
   {
-    id: "finexa",
+    slug: "finexa",
     name: "Finexa",
-    tagline: "AI Personal Finance Platform",
+    category: "AI Fintech",
+    tagline: "The finance platform that came before SpendDecode.",
     description:
-      "An AI-powered personal finance management platform with expense extraction, health scoring, AI coach, gamification, and goal tracking.",
-    problem: "People lack personalized, intelligent tools to understand and improve their financial health.",
-    idea: "Build a comprehensive AI financial platform that combines document processing, spending analysis, and conversational AI coaching.",
-    whatIBuilt:
-      "Full-stack platform with Django backend, React TypeScript frontend, AI expense extraction from documents, financial health scoring algorithm, AI coach (LangChain + Gemini), gamification system, and goal tracking.",
-    tech: ["Python", "Django", "React", "TypeScript", "LangChain", "Google Gemini", "PostgreSQL", "MongoDB"],
-    challenges:
-      "Rapid financial product development under hackathon constraints. AI integration for document expense extraction. Designing a meaningful health score algorithm.",
-    learned:
-      "Product thinking for fintech, AI integration under time pressure, team execution, full-stack architecture decisions.",
-    status: "COMPLETED",
-    github: "https://github.com/atharva-404/Logic_Legion_Finexa",
-    color: "#06B6D4",
-    accentColor: "#0891B2",
-    year: "2026",
+      "An earlier AI personal-finance platform: document-based expense extraction, a financial health score, an AI coach, goals and habit challenges. Much of what I learned here shaped SpendDecode.",
+    features: ["AI expense extraction", "Financial health score", "AI coach", "Goals and habit challenges"],
+    tech: ["TypeScript", "React", "Django", "LangChain", "Gemini", "MongoDB"],
+    contribution: "Built with team Deploy House during GHRhack 2.0.",
+    status: "Earlier project",
+    tier: "earlier",
+    hackathon: "GHRhack 2.0",
+    links: { github: "https://github.com/atharva-404/Logic_Legion_Finexa" },
+    keywords: ["finexa", "earlier", "finance"],
   },
   {
-    id: "datify",
-    name: "Datify",
-    tagline: "AI-Powered Compatibility Discovery",
-    description: "An AI-powered dating concept exploring personality matching through conversational AI before showing profiles.",
-    problem: "Dating apps focus on swiping based on photos, not genuine compatibility discovery.",
-    idea: "Use AI conversations to discover compatibility before revealing profiles — personality first, looks second.",
-    whatIBuilt: "A concept prototype exploring AI-driven compatibility conversations and personality matching algorithms.",
-    tech: ["Python", "AI", "Chatbot", "NLP"],
-    challenges: "Defining what 'compatibility' means algorithmically. Ethical AI design for personal relationships.",
-    learned: "AI product design, ethical considerations, conversational UI design.",
-    status: "PROTOTYPE",
-    color: "#EC4899",
-    accentColor: "#DB2777",
-    year: "2025",
+    slug: "finright-ai",
+    name: "FinRight AI",
+    category: "Fintech",
+    tagline: "Personal liquidity and group expense sharing.",
+    description:
+      "A full-stack financial intelligence platform focused on personal liquidity and group expense sharing.",
+    features: ["Group expense sharing", "Liquidity insights"],
+    tech: ["React", "Django", "Django REST Framework", "LangChain"],
+    contribution: "Built with team Deploy House during MumbaiHacks 2025.",
+    status: "Hackathon build",
+    tier: "earlier",
+    hackathon: "MumbaiHacks 2025",
+    links: { github: "https://github.com/atharva-404/FinRight-AI" },
+    keywords: ["finright", "fin right", "mumbaihacks"],
+  },
+  {
+    slug: "rag-pdf-assistant",
+    name: "RAG PDF Assistant",
+    category: "Generative AI",
+    tagline: "Chat with a PDF using local embeddings and Gemini.",
+    description:
+      "A Streamlit RAG app: PDF extraction, overlapping chunks, local sentence-transformer embeddings, FAISS search and Gemini answers grounded in the retrieved text.",
+    features: ["Local embeddings", "FAISS similarity search", "Source chunks with page numbers"],
+    tech: ["Python", "FAISS", "Sentence Transformers", "Gemini", "Streamlit"],
+    contribution: "Built solo to learn RAG end to end.",
+    status: "Completed",
+    tier: "earlier",
+    links: { github: "https://github.com/atharva-404/RAG-PDF-Assistant" },
+    keywords: ["rag", "pdf", "retrieval", "faiss", "embeddings"],
   },
 ];
+
+export const flagshipProject = projects.find((p) => p.tier === "flagship")!;
+export const featuredProjects = projects.filter((p) => p.tier === "featured");
+export const earlierProjects = projects.filter((p) => p.tier === "earlier");

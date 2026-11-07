@@ -1,84 +1,88 @@
-"use client";
+import { ArrowUpRight, Download, Mail } from "lucide-react";
+import { profile } from "@/data/profile";
+import { Reveal } from "@/components/ui/Reveal";
+import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons/BrandIcons";
+import { CopyEmail } from "@/components/contact/CopyEmail";
 
-import { motion } from "framer-motion";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { WhatIf } from "@/components/ui/WhatIf";
-import { social } from "@/data/social";
+const channels = [
+  { label: "LinkedIn", detail: "Connect professionally", href: profile.links.linkedin, icon: <LinkedInIcon size={20} /> },
+  { label: "GitHub", detail: "@atharva-404", href: profile.links.github, icon: <GitHubIcon size={20} /> },
+  { label: "X", detail: "@atharva_sonar_", href: profile.links.x, icon: <XIcon size={18} /> },
+  { label: "Resume", detail: "Download PDF", href: profile.links.resumeDownload, icon: <Download size={20} /> },
+];
 
 export function Contact() {
   return (
-    <section id="contact" className="section-padding border-t border-[#2a2f2e] relative overflow-hidden bg-[#171A19]" aria-label="Contact section">
-      <div className="container-lg text-center relative z-10">
-        <SectionReveal>
-          <p className="label-mono text-[#D97A57] mb-4">GET IN TOUCH</p>
-          <h2 className="heading-display text-[clamp(2rem,7vw,5rem)] text-white mb-4">
-            Have an <span className="text-[#D97A57]">Idea?</span>
-          </h2>
-          <p className="text-base sm:text-lg text-[#626865] mb-8 sm:mb-10 max-w-md mx-auto">
-            Let&apos;s turn it into something real.
+    <section id="contact" aria-labelledby="contact-title" className="section-y relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute left-1/2 top-[30%] h-[70vmax] w-[70vmax] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,107,53,0.12),transparent_55%)]"
+        aria-hidden="true"
+      />
+
+      <div className="container-site relative">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <p className="eyebrow flex items-center justify-center gap-3">
+            <span className="text-accent">06</span>
+            <span className="h-px w-8 bg-line-strong" aria-hidden="true" />
+            <span>Contact</span>
           </p>
-        </SectionReveal>
+          <h2 id="contact-title" className="font-display-tight mt-8 text-[clamp(2.75rem,8vw,6.5rem)] font-semibold">
+            Have an <span className="text-accent">Interesting</span> Idea?
+          </h2>
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
+            Let&apos;s connect, collaborate, or build something meaningful together.
+          </p>
+        </Reveal>
 
-        <SectionReveal delay={0.1}>
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-10 sm:mb-12 max-w-lg mx-auto sm:max-w-none">
-            <motion.a
-              href={`mailto:${social.email}`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-[#D97A57] text-white font-semibold text-[14px] sm:text-[13px] tracking-wide rounded-xl sm:rounded-[10px] hover:bg-[#c46c4b] transition-colors glow-orange text-center min-h-[48px] flex items-center justify-center"
-              id="contact-email-btn"
-            >
-              Email Me
-            </motion.a>
-            <motion.a
-              href={social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto px-6 py-3.5 sm:py-3 border border-[#3a3f3e] text-white font-medium text-[14px] sm:text-[13px] tracking-wide rounded-xl sm:rounded-[10px] hover:border-[#D97A57] hover:text-[#D97A57] transition-all text-center min-h-[48px] flex items-center justify-center"
-              id="contact-linkedin-btn"
-            >
-              LinkedIn
-            </motion.a>
-            <motion.a
-              href={social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto px-6 py-3.5 sm:py-3 border border-[#3a3f3e] text-white font-medium text-[14px] sm:text-[13px] tracking-wide rounded-xl sm:rounded-[10px] hover:border-[#D97A57] hover:text-[#D97A57] transition-all text-center min-h-[48px] flex items-center justify-center"
-              id="contact-github-btn"
-            >
-              GitHub
-            </motion.a>
-            <motion.a
-              href={social.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto px-6 py-3.5 sm:py-3 border border-[#7FA06F]/30 text-[#7FA06F] font-medium text-[14px] sm:text-[13px] tracking-wide rounded-xl sm:rounded-[10px] hover:bg-[#7FA06F]/10 transition-all text-center min-h-[48px] flex items-center justify-center"
-              id="contact-resume-btn"
-            >
-              Download Resume
-            </motion.a>
+        <Reveal delay={0.1} className="mx-auto mt-14 max-w-3xl">
+          <div className="card-sweep surface flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <a href={`mailto:${profile.email}`} className="group flex min-w-0 items-center gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-bg transition-transform duration-300 group-hover:scale-105">
+                <Mail size={20} aria-hidden="true" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Email me</span>
+                <span className="block truncate font-display text-[clamp(1.1rem,3.6vw,1.6rem)] font-semibold underline decoration-transparent decoration-2 underline-offset-[6px] transition-colors group-hover:decoration-accent">
+                  {profile.email}
+                </span>
+              </span>
+            </a>
+            <div className="flex items-center gap-3 self-end sm:self-auto">
+              <CopyEmail email={profile.email} />
+              <a href={`mailto:${profile.email}`} className="btn btn-primary">
+                <span>Say hello</span>
+                <span className="btn-icon" data-motion="up-right" aria-hidden="true">
+                  <ArrowUpRight size={16} />
+                </span>
+              </a>
+            </div>
           </div>
-        </SectionReveal>
 
-        <SectionReveal delay={0.2}>
-          <WhatIf />
-        </SectionReveal>
-
-        <SectionReveal delay={0.3}>
-          <div className="mt-10 sm:mt-14 pt-8 sm:pt-10 border-t border-[#2a2f2e]">
-            <p className="text-lg sm:text-xl text-[#626865] font-medium mb-2">Still scrolling?</p>
-            <p className="text-[clamp(1.3rem,4vw,2.8rem)] font-[family-name:var(--font-display)] font-bold text-white leading-tight">
-              Let&apos;s build something{" "}
-              <span className="text-[#D97A57]">worth scrolling for.</span>
-            </p>
-          </div>
-        </SectionReveal>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {channels.map((channel) => (
+              <li key={channel.label}>
+                <a
+                  href={channel.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex h-full items-center justify-between gap-3 rounded-2xl border border-line bg-card/60 p-5 transition-[border-color,background-color,transform] duration-300 hover:-translate-y-1 hover:border-line-strong hover:bg-card"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="text-muted transition-colors group-hover:text-fg" aria-hidden="true">
+                      {channel.icon}
+                    </span>
+                    <span>
+                      <span className="block font-medium">{channel.label}</span>
+                      <span className="block text-xs text-faint">{channel.detail}</span>
+                    </span>
+                  </span>
+                  <ArrowUpRight size={17} className="text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden="true" />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

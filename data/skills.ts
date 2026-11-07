@@ -1,58 +1,112 @@
-export interface SkillItem {
+/**
+ * Skill categories. `icon` is either a Simple Icons slug (brand logos)
+ * or a lucide key for concepts that have no brand mark.
+ * No proficiency percentages on purpose.
+ */
+
+export type SkillIcon =
+  | { kind: "brand"; slug: BrandSlug }
+  | { kind: "concept"; name: ConceptIcon };
+
+export type BrandSlug =
+  | "python" | "cplusplus" | "javascript" | "typescript"
+  | "django" | "fastapi"
+  | "react" | "nextdotjs" | "html5" | "css" | "tailwindcss"
+  | "langchain" | "opencv"
+  | "postgresql" | "mysql" | "mongodb" | "supabase" | "sqlite"
+  | "git" | "github" | "docker" | "redis" | "firebase" | "cloudflare" | "postman";
+
+export type ConceptIcon = "sparkles" | "brain" | "search" | "bot" | "network" | "braces" | "radio" | "layers";
+
+export interface Skill {
   name: string;
-  category: "BUILDING" | "COMFORTABLE" | "EXPLORING";
-  domain: "language" | "frontend" | "backend" | "ai" | "database" | "infra" | "payment";
+  icon: SkillIcon;
 }
 
-export const skills: SkillItem[] = [
-  // BUILDING
-  { name: "Python", category: "BUILDING", domain: "language" },
-  { name: "Django", category: "BUILDING", domain: "backend" },
-  { name: "REST APIs", category: "BUILDING", domain: "backend" },
-  { name: "React", category: "BUILDING", domain: "frontend" },
-  { name: "Git / GitHub", category: "BUILDING", domain: "infra" },
-  { name: "Django REST Framework", category: "BUILDING", domain: "backend" },
-  { name: "Django Channels", category: "BUILDING", domain: "backend" },
-  { name: "HTML / CSS", category: "BUILDING", domain: "frontend" },
-  { name: "RAG Systems", category: "BUILDING", domain: "ai" },
-  { name: "AI Integration", category: "BUILDING", domain: "ai" },
+export interface SkillGroup {
+  id: string;
+  title: string;
+  blurb: string;
+  skills: Skill[];
+}
 
-  // COMFORTABLE
-  { name: "C++", category: "COMFORTABLE", domain: "language" },
-  { name: "JavaScript", category: "COMFORTABLE", domain: "language" },
-  { name: "TypeScript", category: "COMFORTABLE", domain: "language" },
-  { name: "PostgreSQL", category: "COMFORTABLE", domain: "database" },
-  { name: "MySQL", category: "COMFORTABLE", domain: "database" },
-  { name: "SQLite", category: "COMFORTABLE", domain: "database" },
-  { name: "Supabase", category: "COMFORTABLE", domain: "database" },
-  { name: "OpenCV", category: "COMFORTABLE", domain: "ai" },
-  { name: "Tailwind CSS", category: "COMFORTABLE", domain: "frontend" },
-  { name: "WebSockets", category: "COMFORTABLE", domain: "backend" },
-  { name: "Razorpay", category: "COMFORTABLE", domain: "payment" },
-  { name: "Firebase / FCM", category: "COMFORTABLE", domain: "payment" },
-  { name: "Redis", category: "COMFORTABLE", domain: "infra" },
-  { name: "Celery", category: "COMFORTABLE", domain: "infra" },
-  { name: "Docker (basics)", category: "COMFORTABLE", domain: "infra" },
+const brand = (slug: BrandSlug): SkillIcon => ({ kind: "brand", slug });
+const concept = (name: ConceptIcon): SkillIcon => ({ kind: "concept", name });
 
-  // EXPLORING
-  { name: "PyTorch", category: "EXPLORING", domain: "ai" },
-  { name: "TensorFlow", category: "EXPLORING", domain: "ai" },
-  { name: "Advanced ML", category: "EXPLORING", domain: "ai" },
-  { name: "Cybersecurity", category: "EXPLORING", domain: "infra" },
-  { name: "Network Administration", category: "EXPLORING", domain: "infra" },
-  { name: "Cloud Architecture", category: "EXPLORING", domain: "infra" },
-  { name: "Distributed Systems", category: "EXPLORING", domain: "infra" },
-  { name: "React Native", category: "EXPLORING", domain: "frontend" },
-  { name: "Framer Motion", category: "EXPLORING", domain: "frontend" },
-  { name: "Advanced AI Infrastructure", category: "EXPLORING", domain: "ai" },
+export const skillGroups: SkillGroup[] = [
+  {
+    id: "ai",
+    title: "AI & Machine Learning",
+    blurb: "LLM apps, retrieval and agents",
+    skills: [
+      { name: "Generative AI", icon: concept("sparkles") },
+      { name: "LLMs", icon: concept("brain") },
+      { name: "RAG", icon: concept("search") },
+      { name: "LangChain", icon: brand("langchain") },
+      { name: "AI Agents", icon: concept("bot") },
+      { name: "OpenCV", icon: brand("opencv") },
+      { name: "Machine Learning", icon: concept("network") },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend",
+    blurb: "APIs, real-time and data flow",
+    skills: [
+      { name: "Django", icon: brand("django") },
+      { name: "Django REST Framework", icon: concept("layers") },
+      { name: "FastAPI", icon: brand("fastapi") },
+      { name: "REST APIs", icon: concept("braces") },
+      { name: "Django Channels", icon: concept("radio") },
+    ],
+  },
+  {
+    id: "frontend",
+    title: "Frontend",
+    blurb: "Interfaces people enjoy using",
+    skills: [
+      { name: "React", icon: brand("react") },
+      { name: "Next.js", icon: brand("nextdotjs") },
+      { name: "HTML", icon: brand("html5") },
+      { name: "CSS", icon: brand("css") },
+      { name: "Tailwind CSS", icon: brand("tailwindcss") },
+    ],
+  },
+  {
+    id: "languages",
+    title: "Programming",
+    blurb: "Daily drivers",
+    skills: [
+      { name: "Python", icon: brand("python") },
+      { name: "TypeScript", icon: brand("typescript") },
+      { name: "JavaScript", icon: brand("javascript") },
+      { name: "C++", icon: brand("cplusplus") },
+    ],
+  },
+  {
+    id: "data",
+    title: "Databases",
+    blurb: "Relational, document and hosted",
+    skills: [
+      { name: "PostgreSQL", icon: brand("postgresql") },
+      { name: "MySQL", icon: brand("mysql") },
+      { name: "MongoDB", icon: brand("mongodb") },
+      { name: "Supabase", icon: brand("supabase") },
+      { name: "SQLite", icon: brand("sqlite") },
+    ],
+  },
+  {
+    id: "tools",
+    title: "Tools & Infrastructure",
+    blurb: "Shipping and running software",
+    skills: [
+      { name: "Git", icon: brand("git") },
+      { name: "GitHub", icon: brand("github") },
+      { name: "Docker", icon: brand("docker") },
+      { name: "Redis", icon: brand("redis") },
+      { name: "Firebase", icon: brand("firebase") },
+      { name: "Cloudflare", icon: brand("cloudflare") },
+      { name: "Postman", icon: brand("postman") },
+    ],
+  },
 ];
-
-export const techStack = {
-  languages: ["Python", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
-  frontend: ["React", "React Native", "Tailwind CSS", "Framer Motion"],
-  backend: ["Django", "Django REST Framework", "Django Channels", "REST APIs"],
-  ai: ["Machine Learning", "AI", "PyTorch", "TensorFlow", "OpenCV", "RAG", "Embeddings", "AI Assistants", "Gemini"],
-  databases: ["PostgreSQL", "MySQL", "SQLite", "Supabase"],
-  infra: ["Git", "GitHub", "Docker", "Redis", "Celery", "Cloud platforms"],
-  payments: ["Razorpay", "UPI integrations", "Firebase / FCM"],
-};

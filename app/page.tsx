@@ -1,60 +1,41 @@
-"use client";
-
-import { useEffect } from "react";
-import { CursorGlow } from "@/components/ui/CursorGlow";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { Nav } from "@/components/navigation/Nav";
-import { Hero } from "@/components/hero/Hero";
-import { Identity } from "@/components/sections/Identity";
-import { WhatIBuild } from "@/components/sections/WhatIBuild";
-import { FeaturedProject } from "@/components/sections/FeaturedProject";
-import { ProjectUniverse } from "@/components/sections/ProjectUniverse";
-import { BuildLog } from "@/components/sections/BuildLog";
+import { Nav } from "@/components/layout/Nav";
+import { ScrollManager } from "@/components/layout/ScrollManager";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
-import { FounderSection, StartupLab } from "@/components/sections/FounderSection";
-import { Hackathons } from "@/components/sections/Hackathons";
-import { Learning } from "@/components/sections/Learning";
-import { BuildEngine } from "@/components/3d/BuildEngine";
-import { Terminal } from "@/components/sections/Terminal";
+import { Journey } from "@/components/sections/Journey";
+import { Velquix } from "@/components/sections/Velquix";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
+import { AssistantWidget } from "@/components/assistant/AssistantWidget";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo/site";
+import { homeGraph } from "@/lib/seo/schema";
+
+const title = "Atharva Sonar | AI Engineer, Full-Stack Developer & Founder";
+const description =
+  "Atharva Sonar is an AI Engineer, Full-Stack Developer and founder of Velquix, building AI-powered apps, SaaS and fintech products with Python, Django and React.";
+
+export const metadata = pageMetadata({ title, description, path: "/", type: "profile" });
 
 export default function Home() {
-  // Fix: Always start at top on fresh page load
-  useEffect(() => {
-    // Disable browser scroll restoration
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
-    }
-    // Only scroll to top if there's no hash in the URL (preserve anchor nav)
-    if (!window.location.hash) {
-      window.scrollTo(0, 0);
-    }
-  }, []);
-
   return (
-    <main>
-      {/* Global UI */}
-      <CursorGlow />
-      <ScrollProgress />
+    <>
+      <JsonLd data={homeGraph(title, description)} />
+      <ScrollManager />
       <Nav />
-
-      {/* Sections — scroll story */}
-      <Hero />
-      <Identity />
-      <WhatIBuild />
-      <FeaturedProject />
-      <ProjectUniverse />
-      <BuildLog />
-      <Skills />
-      <FounderSection />
-      <StartupLab />
-      <Hackathons />
-      <Learning />
-      <BuildEngine />
-      <Terminal />
-      <Contact />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Journey />
+        <Velquix />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+      <AssistantWidget />
+    </>
   );
 }
